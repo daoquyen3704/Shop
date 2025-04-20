@@ -12,6 +12,8 @@ namespace WebBanHang.Models
     {
         public string FullName { get; set; }
         public string Phone { get; set; }
+        //public string Phone { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -27,6 +29,10 @@ namespace WebBanHang.Models
             : base("PostgresConnection", throwIfV1Schema: false)
         {
         }
+        public DbSet<ThongKe> ThongKes { get; set; }
+        //public DbSet<ReviewProduct> ReviewProducts { get; set; }
+        public DbSet<ReviewProduct> Reviews { get; set; }
+
         public DbSet<Category> Categories { get; set; }
         public DbSet<Adv> Advs { get; set; }
         public DbSet<Posts> Posts { get; set; }
