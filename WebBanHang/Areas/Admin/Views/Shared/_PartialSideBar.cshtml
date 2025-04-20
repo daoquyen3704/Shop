@@ -20,6 +20,18 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="/admin/role" class="nav-link">
+                    <i class="nav-icon fas fa-user-shield"></i>
+                    <p>Role</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/admin/account" class="nav-link">
+                    <i class="nav-icon fas fa-user"></i>
+                    <p>Tài khoản</p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="/admin/news" class="nav-link">
                     <i class="nav-icon fas fa-newspaper"></i>
                     <p>Tin Tức</p>
@@ -29,6 +41,12 @@
                 <a href="/admin/posts" class="nav-link">
                     <i class="nav-icon fas fa-file-alt"></i>
                     <p>Bài Viết</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/admin/order" class="nav-link">
+                    <i class="nav-icon fas fa-shopping-cart"></i>
+                    <p>Đơn hàng</p>
                 </a>
             </li>
             <li class="nav-item">
@@ -61,10 +79,25 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="/system-config" class="nav-link">
+                <a href="/admin/Statistical" class="nav-link">
+                    <i class="nav-icon fas fa-chart-bar"></i>
+                    <p>Thống Kê</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/admin/settingsystem" class="nav-link">
                     <i class="nav-icon fas fa-cogs"></i>
                     <p>Cấu Hình Hệ Thống</p>
                 </a>
+            </li>
+            <li class="nav-item">
+                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "nav-link" }))
+                {
+        @Html.AntiForgeryToken()
+                        <a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link">
+                            <i class="nav-icon fas fa-sign-out-alt"></i>
+                            <p>Đăng xuất</p>
+                        </a>}
             </li>
         </ul>
     </nav>
