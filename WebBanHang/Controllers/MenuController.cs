@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebBanHang.Models;
+using WebBanHang.Models.EF;
 
 namespace WebBanHang.Controllers
 {
@@ -39,6 +40,16 @@ namespace WebBanHang.Controllers
         {
             var items = db.ProductCategories.ToList();
             return PartialView("_MenuArrivals", items);
+        }
+
+        public ActionResult MenuNews()
+        {
+            var items = db.News
+                .Where(x => x.IsActive)
+                .OrderByDescending(x => x.CreatedDate)
+                .Take(5)
+                .ToList();
+            return PartialView("_MenuNews", items);
         }
     }
 }

@@ -166,17 +166,78 @@ namespace WebBanHang.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Product model)
+        public ActionResult Edit(Product model, List<string> Images, List<int> rDefault)
         {
             if (ModelState.IsValid)
             {
-                model.ModifiedDate = DateTime.Now;
-                model.Alias = WebBanHang.Models.Common.Filter.FilterChar(model.Title);
-                db.Products.Attach(model);
-                db.Entry(model).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    var existingProduct = db.Products.Find(model.Id);
+                    if (existingProduct == null)
+                    {
+                        return HttpNotFound();
+                    }
+
+                    // Cập nhật thông tin sản phẩm
+                    existingProduct.Title = model.Title;
+                    existingProduct.Alias = WebBanHang.Models.Common.Filter.FilterChar(model.Title);
+                    existingProduct.ProductCode = model.ProductCode;
+                    existingProduct.ProductCategoryId = model.ProductCategoryId;
+                    existingProduct.Description = model.Description;
+                    existingProduct.Detail = model.Detail;
+                    existingProduct.Quantity = model.Quantity > 0 ? model.Quantity : existingProduct.Quantity; // Giữ nguyên số lượng cũ nếu số lượng mới <= 0
+                    existingProduct.Price = model.Price;
+                    existingProduct.PriceSale = model.PriceSale;
+                    existingProduct.OriginalPrice = model.OriginalPrice;
+                    existingProduct.SeoTitle = model.SeoTitle;
+                    existingProduct.SeoKeywords = model.SeoKeywords;
+                    existingProduct.SeoDescription = model.SeoDescription;
+                    existingProduct.IsActive = model.IsActive;
+                    existingProduct.IsHot = model.IsHot;
+                    existingProduct.IsFeature = model.IsFeature;
+                    existingProduct.IsSale = model.IsSale;
+                    existingProduct.ModifiedDate = DateTime.Now;
+
+                    // Xử lý hình ảnh
+                    if (Images != null && Images.Count > 0)
+                    {
+                        // Xóa các hình ảnh cũ
+                        var oldImages = db.Set<ProductImage>().Where(x => x.ProductId == model.Id).ToList();
+                        if (oldImages != null && oldImages.Count > 0)
+                        {
+                            db.Set<ProductImage>().RemoveRange(oldImages);
+                        }
+
+                        // Thêm hình ảnh mới
+                        for (int i = 0; i < Images.Count; i++)
+                        {
+                            bool isDefault = (rDefault != null && rDefault.Count > 0 && i == rDefault[0] - 1);
+                            var productImage = new ProductImage
+                            {
+                                ProductId = model.Id,
+                                Image = Images[i],
+                                IsDefault = isDefault
+                            };
+                            db.Set<ProductImage>().Add(productImage);
+
+                            // Cập nhật hình ảnh đại diện nếu là ảnh mặc định
+                            if (isDefault)
+                            {
+                                existingProduct.Image = Images[i];
+                            }
+                        }
+                    }
+
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "Có lỗi xảy ra: " + ex.Message);
+                }
             }
+
+            ViewBag.ProductCategory = new SelectList(db.ProductCategories.ToList(), "Id", "Title", model.ProductCategoryId);
             return View(model);
         }
 

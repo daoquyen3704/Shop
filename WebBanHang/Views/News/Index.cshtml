@@ -1,67 +1,30 @@
-﻿
-@model PagedList.IPagedList<WebBanHang.Models.EF.News>
+﻿@model IEnumerable<WebBanHang.Models.EF.News>
 @using PagedList.Mvc;
 @using PagedList;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link rel="stylesheet" type="text/css" href="~/Content/assets/styles/main_styles.css">
-<style>
-    .news_section_container {
-        margin-top: 180px;
-    }
 
-    .row-item-new {
-        margin-bottom: 20px;
-    }
-
-    .title-news {
-        font-size: 24px;
-        border-bottom: 1px solid;
-        padding: 15px 0;
-        margin-bottom: 25px;
-    }
-
-    .img-box img {
-        max-width: 100%;
-        max-height: 100%;
-    }
-</style>
-<div class="container news_section_container">
-    <div class="row">
-        <div class="col-md-12">
-            <h1 class="title-news"> Tin tức</h1>
+<!-- Blog Start -->
+<div class="container-fluid blog py-5">
+    <div class="container py-5">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;">
+            <h1 class="display-5 text-capitalize mb-3">Luxury<span class="text-primary"> Watch Blog</span></h1>
+            <p class="mb-0">
+                Khám phá thế giới đồng hồ cao cấp qua những bài viết chuyên sâu về thương hiệu, công nghệ và xu hướng mới nhất trong ngành đồng hồ xa xỉ.
+            </p>
         </div>
-    </div>
-
-    @if (Model != null && Model.Any())
-    {
-        foreach (var item in Model)
+        @if (Model != null && Model.Any())
         {
-            <div class="row row-item-new">
-                <div class="col-md-3">
-                    <div class="img-box">
-                        <a href="" title="@item.Title"><img src="@item.Image" alt="@item.Title" /></a>
-                    </div>
-                </div>
-                <div class="col-md-9">
-                    <div class="content-box">
-                        <h3><a href="/@item.Alias-n@(item.Id)" title="@item.Title">@item.Title</a></h3>
-                        <div class="description-box">
-                            @item.Description
-                        </div>
-                    </div>
+            @Html.Action("Partial_News_Home", "News")
+            <div class="row mt-4">
+                <div class="col-12 text-center">
+                    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
                 </div>
             </div>
         }
-        <div class="row">
-            <div class="col-6"></div>
-            <div class="col-6" style="text-align:right;">
-                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
-            </div>
-        </div>
-    }
-
+    </div>
 </div>
+<!-- Blog End -->
 

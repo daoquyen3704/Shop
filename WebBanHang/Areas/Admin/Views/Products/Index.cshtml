@@ -100,46 +100,46 @@
                             {
                                 strImg = CheckImage.Image;
                             }
-                    <tr id="trow_@item.Id">
-                        <td><input type="checkbox" class="cbkItem" value="@item.Id" /></td>
-                        <td>@i</td>
-                        <td><img class="imgproduct" data-id="@item.Id" src="@strImg" width="50" /></td>
-                        <td>@item.Title</td>
-                        <td>@item.ProductCategory.Title</td>
-                        <td>@item.Quantity</td>
-                        <td>@WebBanHang.Models.Common.Common.FormatNumber(item.Price, 0)</td>
-                        <td>@item.CreatedDate.ToString("dd/MM/yyyy")</td>
-                        <td class="text-center">
-                            <a href="#" data-id="@item.Id" data-field="IsHome" class="btnToggle">
-                                @Html.Raw(item.IsHome ? "<i class='fa fa-check text-success'></i>" : "<i class='fa fa-times text-danger'></i>")
-                            </a>
-                        </td>
-                        <td class="text-center">
-                            <a href="#" data-id="@item.Id" data-field="IsSale" class="btnToggle">
-                                @Html.Raw(item.IsSale ? "<i class='fa fa-check text-success'></i>" : "<i class='fa fa-times text-danger'></i>")
-                            </a>
-                        </td>
-                        <td class="text-center">
-                            <a href="#" data-id="@item.Id" data-field="IsActive" class="btnToggle">
-                                @Html.Raw(item.IsActive ? "<i class='fa fa-check text-success'></i>" : "<i class='fa fa-times text-danger'></i>")
-                            </a>
-                        </td>
+                            <tr id="trow_@item.Id">
+                                <td><input type="checkbox" class="cbkItem" value="@item.Id" /></td>
+                                <td>@i</td>
+                                <td><img class="imgproduct" data-id="@item.Id" src="@strImg" width="50" /></td>
+                                <td>@item.Title</td>
+                                <td>@item.ProductCategory.Title</td>
+                                <td>@item.Quantity</td>
+                                <td>@WebBanHang.Models.Common.Common.FormatNumber(item.Price, 0)</td>
+                                <td>@item.CreatedDate.ToString("dd/MM/yyyy")</td>
+                                <td class="text-center">
+                                    <a href="#" data-id="@item.Id" data-field="IsHome" class="btnToggle">
+                                        @Html.Raw(item.IsHome ? "<i class='fa fa-check text-success'></i>" : "<i class='fa fa-times text-danger'></i>")
+                                    </a>
+                                </td>
+                                <td class="text-center">
+                                    <a href="#" data-id="@item.Id" data-field="IsSale" class="btnToggle">
+                                        @Html.Raw(item.IsSale ? "<i class='fa fa-check text-success'></i>" : "<i class='fa fa-times text-danger'></i>")
+                                    </a>
+                                </td>
+                                <td class="text-center">
+                                    <a href="#" data-id="@item.Id" data-field="IsActive" class="btnToggle">
+                                        @Html.Raw(item.IsActive ? "<i class='fa fa-check text-success'></i>" : "<i class='fa fa-times text-danger'></i>")
+                                    </a>
+                                </td>
 
 
-                        @*<td class="text-center">
-            <a href='#' data-id="@item.Id" class="btnHome">@Html.Raw(strCheckHome)</a>
-        </td>
-        <td class="text-center">
-            <a href='#' data-id="@item.Id" class="btnSale">@Html.Raw(strCheckSale)</a>
-        </td>
-        <td class="text-center">
-            <a href='#' data-id="@item.Id" class="btnActive">@Html.Raw(strCheck)</a>
-        </td>*@
-                        <td>
-                            <a href="/admin/Products/edit/@item.Id" class="btn btn-sm btn-primary">Sửa</a>
-                            <a href="#" data-id="@item.Id" class="btn btn-sm btn-danger btnDelete">Xóa</a>
-                        </td>
-                    </tr>
+                                @*<td class="text-center">
+                                        <a href='#' data-id="@item.Id" class="btnHome">@Html.Raw(strCheckHome)</a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href='#' data-id="@item.Id" class="btnSale">@Html.Raw(strCheckSale)</a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href='#' data-id="@item.Id" class="btnActive">@Html.Raw(strCheck)</a>
+                                    </td>*@
+                                <td>
+                                    <a href="/admin/Products/edit/@item.Id" class="btn btn-sm btn-primary">Sửa</a>
+                                    <a href="#" data-id="@item.Id" class="btn btn-sm btn-danger btnDelete">Xóa</a>
+                                </td>
+                            </tr>
                             i++;
                         }
                     }
@@ -231,7 +231,7 @@
 
 
 
-           
+
             $(document).ready(function () {
                 $('body').on('click', '.btnToggle', function (e) {
                     e.preventDefault();
@@ -290,8 +290,8 @@
                 checkbox.prop('checked', checkStatus);
 
             });
-           
-            
+
+
         });
     </script>
 }
