@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WebBanHang.Models;
+using System.IO;
+using System.Web;
 
 namespace WebBanHang.Controllers
 {
@@ -54,30 +56,107 @@ namespace WebBanHang.Controllers
 
         public async Task<ActionResult> Profile()
         {
-            var user = await UserManager.FindByNameAsync(User.Identity.Name);
-            var item = new CreateAccountViewModel();
-            item.Email = user.Email;
-            item.FullName = user.FullName;
-            item.Phone = user.Phone;
-            item.UserName = user.UserName;
-            return View(item);
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var userId = User.Identity.GetUserId();
+            var user = await UserManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var profile = new ProfileViewModel
+            {
+                UserName = user.UserName,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Phone = user.Phone,
+                Birthday = user.Birthday,
+                Gender = user.Gender,
+                Address = user.Address,
+                Avatar = user.Avatar,
+                CreatedDate = user.CreatedDate
+            };
+
+            return View(profile);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> PostProfile(CreateAccountViewModel req)
+        public async Task<ActionResult> UpdateProfile(ProfileViewModel model)
         {
-            var user = await UserManager.FindByEmailAsync(req.Email);
-            user.FullName = req.FullName;
-            user.Phone = req.Phone;
-            var rs = await UserManager.UpdateAsync(user);
-            if (rs.Succeeded)
+            if (ModelState.IsValid)
             {
-                return RedirectToAction("Profile");
+                var userId = User.Identity.GetUserId();
+                var user = await UserManager.FindByIdAsync(userId);
 
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.Phone = model.Phone;
+                user.Birthday = model.Birthday;
+                user.Gender = model.Gender;
+                user.Address = model.Address;
+
+                var result = await UserManager.UpdateAsync(user);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Profile");
+                }
+                AddErrors(result);
             }
-            return View(req);
+            return View("Profile", model);
         }
+
+        [HttpPost]
+        public ActionResult UploadAvatar(HttpPostedFileBase file)
+        {
+            if (file != null && file.ContentLength > 0)
+            {
+                // Đảm bảo người dùng đã đăng nhập và Session chứa IdUser
+                if (Session["IdUser"] == null)
+                {
+                    return Json(new { success = false, message = "Bạn chưa đăng nhập." });
+                }
+
+                var userId = Session["IdUser"].ToString();
+                var user = db.Users.Find(userId);
+
+                if (user == null)
+                {
+                    return Json(new { success = false, message = "Không tìm thấy người dùng." });
+                }
+
+                // Tạo tên file duy nhất
+                var fileName = Path.GetFileNameWithoutExtension(file.FileName);
+                var extension = Path.GetExtension(file.FileName);
+                fileName = $"{fileName}_{DateTime.Now.Ticks}{extension}";
+
+                // Đường dẫn thư mục
+                var path = Server.MapPath("~/Content/images/avatar/");
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                // Lưu file
+                var filePath = Path.Combine(path, fileName);
+                file.SaveAs(filePath);
+
+                // Cập nhật avatar vào DB
+                user.Avatar = "/Content/images/avatar/" + fileName;
+                db.SaveChanges();
+
+                return Json(new { success = true, avatar = user.Avatar });
+            }
+
+            return Json(new { success = false, message = "Không có file nào được chọn." });
+        }
+
+
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -177,24 +256,29 @@ namespace WebBanHang.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Phone = model.Phone,
+                    Birthday = model.Birthday,
+                    Gender = model.Gender,
+                    Address = model.Address,
+                    CreatedDate = DateTime.Now
+                };
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     UserManager.AddToRole(user.Id, "Customer");
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }
 
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
 
@@ -237,10 +321,9 @@ namespace WebBanHang.Controllers
 
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
             }
 
             // If we got this far, something failed, redisplay form

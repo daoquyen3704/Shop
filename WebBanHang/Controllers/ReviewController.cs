@@ -13,7 +13,7 @@ namespace WebBanHang.Controllers
     [Authorize]
     public class ReviewController : Controller
     {
-        private ApplicationDbContext _db = new ApplicationDbContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Review
         public ActionResult Index()
         {
@@ -21,23 +21,9 @@ namespace WebBanHang.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult _Review(int productId)
+        public ActionResult _Review(int id)
         {
-            ViewBag.ProductId = productId;
-            var item = new ReviewProduct();
-            if (User.Identity.IsAuthenticated)
-            {
-                var userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
-                var userManager = new UserManager<ApplicationUser>(userStore);
-                var user = userManager.FindByName(User.Identity.Name);
-                if (user != null)
-                {
-                    item.Email = user.Email;
-                    item.FullName = user.FullName;
-                    item.UserName = user.UserName;
-                }
-                return PartialView(item);
-            }
+            ViewBag.ProductId = id;
             return PartialView();
         }
 
@@ -48,7 +34,7 @@ namespace WebBanHang.Controllers
                 var userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
                 var userManager = new UserManager<ApplicationUser>(userStore);
                 var user = userManager.FindByName(User.Identity.Name);
-                var items = _db.Orders.Where(x => x.CustomerId == user.Id).ToList();
+                var items = db.Orders.Where(x => x.CustomerId == user.Id).ToList();
                 return PartialView(items);
             }
 
@@ -56,26 +42,26 @@ namespace WebBanHang.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult _Load_Review(int productId)
+        public ActionResult _Load_Review(int id)
         {
-            var item = _db.Reviews.Where(x => x.ProductId == productId).OrderByDescending(x => x.Id).ToList();
-            ViewBag.Count = item.Count;
-            return PartialView(item);
-            //return PartialView(); 
+            var items = db.Reviews.Where(x => x.ProductId == id).OrderByDescending(x => x.CreatedDate).ToList();
+            ViewBag.Count = items.Count;
+            return PartialView(items);
         }
 
         [AllowAnonymous]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult PostReview(ReviewProduct req)
         {
             if (ModelState.IsValid)
             {
                 req.CreatedDate = DateTime.Now;
-                _db.Reviews.Add(req);
-                _db.SaveChanges();
+                db.Reviews.Add(req);
+                db.SaveChanges();
                 return Json(new { Success = true });
             }
-            return Json(new { Success = false });
+            return Json(new { Success = false, Message = "Có lỗi xảy ra khi gửi đánh giá" });
         }
 
         protected override void Dispose(bool disposing)

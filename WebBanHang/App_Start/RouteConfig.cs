@@ -45,7 +45,7 @@ namespace WebBanHang
            );
             routes.MapRoute(
                name: "detailNews",
-               url: "{alias}-n{id}",
+               url: "bai-viet/{alias}-n{id}",
                defaults: new { controller = "News", action = "Detail", alias = UrlParameter.Optional },
                namespaces: new[] { "WebBanHang.Controllers" }
            );

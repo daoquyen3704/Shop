@@ -149,7 +149,8 @@ namespace WebBanHang.Areas.Admin.Controllers
                 {
                     UserName = model.UserName,
                     Email = model.Email,
-                    FullName = model.FullName,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
                     Phone = model.Phone
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
@@ -235,7 +236,8 @@ namespace WebBanHang.Areas.Admin.Controllers
                 {
                     user.UserName = model.UserName;
                     user.Email = model.Email;
-                    user.FullName = model.FullName;
+                    user.FirstName = model.FirstName;
+                    user.LastName = model.LastName;
                     user.Phone = model.Phone;
 
                     var result = await UserManager.UpdateAsync(user);

@@ -14,12 +14,15 @@ namespace WebBanHang.Controllers
         public ActionResult Index(int? id)
         {
             var items = db.Products.ToList();
+
             if (id != null)
             {
                 items = items.Where(x => x.ProductCategoryId == id).ToList();
             }
+            items = items.Take(9).ToList(); // Lấy 9 cái đầu tiên
             return View(items);
         }
+
 
         public ActionResult Detail(string alias, int id)
         {
@@ -63,6 +66,10 @@ namespace WebBanHang.Controllers
             return PartialView(items);
         }
 
-        
+        public ActionResult ProductRelate(int id)
+        {
+            var items = db.Products.Where(x => x.IsActive && x.ProductCategoryId == id).OrderByDescending(x => x.CreatedDate).Take(4).ToList();
+            return PartialView("_ProductRelate", items);
+        }
     }
 }

@@ -318,13 +318,33 @@ namespace WebBanHang.Controllers
         [HttpPost]
         public ActionResult Update(int id, int quantity)
         {
+            var code = new { Success = false, msg = "", code = -1, Count = 0 };
             ShoppingCart cart = (ShoppingCart)Session["Cart"];
             if (cart != null)
             {
-                cart.UpdateQuantity(id, quantity);
-                return Json(new { Success = true });
+                var checkProduct = cart.Items.FirstOrDefault(x => x.ProductId == id);
+                if (checkProduct != null)
+                {
+                    if (quantity > 0)
+                    {
+                        cart.UpdateQuantity(id, quantity);
+                        code = new { Success = true, msg = "Cập nhật số lượng thành công!", code = 1, Count = cart.Items.Count };
+                    }
+                    else
+                    {
+                        code = new { Success = false, msg = "Số lượng phải lớn hơn 0!", code = -1, Count = cart.Items.Count };
+                    }
+                }
+                else
+                {
+                    code = new { Success = false, msg = "Không tìm thấy sản phẩm trong giỏ hàng!", code = -1, Count = cart.Items.Count };
+                }
             }
-            return Json(new { Success = false });
+            else
+            {
+                code = new { Success = false, msg = "Giỏ hàng trống!", code = -1, Count = 0 };
+            }
+            return Json(code);
         }
 
         [AllowAnonymous]
@@ -360,7 +380,7 @@ namespace WebBanHang.Controllers
             return Json(new { Success = false });
         }
 
-
+        
 
         #region Thanh toán vnpay
         public string UrlPayment(int TypePaymentVN, string orderCode)

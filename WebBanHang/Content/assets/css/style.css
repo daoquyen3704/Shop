@@ -260,7 +260,7 @@
 .bg-breadcrumb {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(rgba(31, 46, 78, 1), rgba(0, 12, 33, 0.8)), url(../img/fact-bg2.jpg);
+    background: linear-gradient(rgba(31, 46, 78, 1), rgba(0, 12, 33, 0.8)), url(~/Content/assets/img/fact-bg2.jpg);
     background-position: center top;
     background-repeat: no-repeat;
     background-size: cover;
@@ -389,7 +389,7 @@
 
 /*** Fact Counter Start ***/
 .counter {
-    background: linear-gradient(rgba(0, 12, 33, 0.9), rgba(31, 46, 78, 0.9)), url(../img/fact-bg2.jpg);
+    background: linear-gradient(rgba(0, 12, 33, 0.9), rgba(31, 46, 78, 0.9)), url(~/Content/assets/img/fact-bg2.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -547,7 +547,7 @@
 
 /*** Process Start ***/
 .steps {
-    background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url(../img/bg-2.jpg);
+    background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url(~/Content/assets/img/bg-2.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
