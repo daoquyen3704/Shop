@@ -5,11 +5,12 @@ using System.Web;
 using System.Web.Mvc;
 using WebBanHang.Models;
 using WebBanHang.Models.EF;
+using WebBanHang.Areas.Admin.Filters;
 
 namespace WebBanHang.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
 
+    [CustomAuthorize(Roles = "Admin")]
     public class CategoryController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

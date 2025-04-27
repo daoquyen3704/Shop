@@ -5,9 +5,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebBanHang.Models;
+using WebBanHang.Areas.Admin.Filters;
 
 namespace WebBanHang.Areas.Admin.Controllers
 {
+    [CustomAuthorize(Roles = "Admin,Employee")]
     public class StatisticalController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

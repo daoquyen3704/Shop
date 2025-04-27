@@ -34,8 +34,29 @@
     @*@Scripts.Render("~/bundles/modernizr")*@
 
 </head>
-<body>
 
+<body>
+<style>
+        
+
+
+
+    /* Định dạng chung cho cả Đăng Nhập và Đăng Ký */
+    .btn-danger,
+    .btn-outline-danger {
+        background-color: #ea001e !important; /* Màu nền */
+        border-color: #ea001e !important; /* Màu viền */
+        color: #fff !important; /* Màu chữ */
+    }
+
+        /* Hiệu ứng hover cho cả hai nút */
+        .btn-danger:hover,
+        .btn-outline-danger:hover {
+            background-color: #c8001a !important; /* Màu nền khi hover (màu đỏ đậm hơn một chút) */
+            border-color: #c8001a !important;
+            color: #fff !important; /* Màu chữ khi hover */
+        }
+</style>
     <!-- Spinner -->
     @*<div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-border text-primary" role="status"></div>
@@ -47,7 +68,7 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light">
                 <a href="" class="navbar-brand p-0">
-                    <h1 class="display-6 text-primary"><i class="fas fa-clock me-3"></i>Luxury Watch</h1>
+                    <h1 class="display-7 text-primary"><i class="fas fa-clock me-3"></i>LuxuryWatch</h1>
                     <!-- <img src="img/logo.png" alt="Logo"> -->
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -55,17 +76,17 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav mx-auto py-0">
-                        @Html.Action("MenuTop", "Menu")
+                        @Html.Raw(Html.Action("MenuTop", "Menu").ToHtmlString())
                     </div>
                     @if (!Request.IsAuthenticated)
                     {
                         <div class="d-flex align-items-center">
                             <div class="btn-auth-group d-flex align-items-center me-3">
                                 <a href="/account/login" class="btn btn-sm btn-danger rounded-pill me-2">
-                                    <i class="fas fa-sign-in-alt me-1"></i>Đăng Nhập
+                                    Đăng Nhập
                                 </a>
                                 <a href="/account/register" class="btn btn-sm btn-outline-danger rounded-pill">
-                                    <i class="fas fa-user-plus me-1"></i>Đăng Ký
+                                    Đăng Ký
                                 </a>
                             </div>
 
@@ -85,7 +106,7 @@
                     {
                         <div class="d-flex align-items-center">
                             <div class="dropdown me-3">
-                                <button class="btn btn-primary rounded-pill py-2 px-4 dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="btn btn-primary rounded-pill py-2 px-2 dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fas fa-user me-2"></i>@User.Identity.Name
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
@@ -154,10 +175,10 @@
                     <div class="footer-item d-flex flex-column">
                         <h4 class="text-white mb-4">Liên Kết Nhanh</h4>
                         <a href="#"><i class="fas fa-angle-right me-2"></i> Giới Thiệu</a>
-                        <a href="#"><i class="fas fa-angle-right me-2"></i> Sản Phẩm</a>
+                        <a href="/san-pham"><i class="fas fa-angle-right me-2"></i> Sản Phẩm</a>
                         <a href="#"><i class="fas fa-angle-right me-2"></i> Thương Hiệu</a>
                         <a href="#"><i class="fas fa-angle-right me-2"></i> Đội Ngũ</a>
-                        <a href="#"><i class="fas fa-angle-right me-2"></i> Liên Hệ</a>
+                        <a href="/lien-he"><i class="fas fa-angle-right me-2"></i> Liên Hệ</a>
                         <a href="#"><i class="fas fa-angle-right me-2"></i> Chính Sách Bảo Hành</a>
                     </div>
                 </div>
@@ -207,6 +228,7 @@
     <script src="~/Content/assets/lib/counterup/counterup.min.js"></script>
     <script src="~/Content/assets/lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="~/Scripts/jsShopping.js"></script>
+    <script src="~/Content/assets/js/main.js"></script>
 
     <!-- Initialize WOW.js -->
     <script>

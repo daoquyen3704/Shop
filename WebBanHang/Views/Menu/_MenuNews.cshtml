@@ -1,4 +1,29 @@
 ﻿@model IEnumerable<WebBanHang.Models.EF.News>
+<style>
+    .blog-img img {
+        height: 220px; /* hoặc chiều cao bạn muốn */
+        object-fit: cover;
+        width: 100%;
+    }
+
+    .text-truncate-description {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        min-height: 72px;
+    }
+
+    .blog-content {
+        height: 350px; /* hoặc điều chỉnh cho phù hợp */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+</style>
+
+
 @if (Model != null && Model.Any())
 {
     <div class="container-fluid blog py-5">
@@ -18,7 +43,9 @@
                                 <img src="@item.Image" class="img-fluid rounded-top w-100" alt="@item.Title">
                             </div>
                             <div class="blog-content rounded-bottom p-4">
-                                <div class="blog-date">@item.CreatedDate.ToString("dd MMM yyyy")</div>
+                                <div class="blog-date">
+                                    @(item.CreatedDate.HasValue ? item.CreatedDate.Value.ToString("dd MMM yyyy") : "")
+                                </div>
                                 <div class="blog-comment my-3">
                                     <div class="small">
                                         <span class="fa fa-user text-primary"></span>
@@ -30,7 +57,7 @@
                                         </div>*@
                                 </div>
                                 <a href="/bai-viet/@item.Alias-n@(item.Id)" class="h4 d-block mb-3">@item.Title</a>
-                                <p class="mb-3">@item.Description</p>
+                                <p class="mb-3 text-truncate-description">@item.Description</p>
                                 <a href="/bai-viet/@item.Alias-n@(item.Id)" class="">Đọc Thêm <i class="fa fa-arrow-right"></i></a>
                             </div>
                         </div>

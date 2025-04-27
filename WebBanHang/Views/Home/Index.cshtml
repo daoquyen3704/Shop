@@ -3,161 +3,85 @@
     ViewBag.Title = "Shop Online";
     ViewBag.SeoDescription = "Shop Online";
 }
-<link href="~/Content/assets/css/style.css" rel="stylesheet">
-<link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet">
-<link href="~/Content/assets/lib/animate/animate.min.css" rel="stylesheet">
-<link href="~/Content/assets//lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+@*<link href="~/Content/assets/css/style.css" rel="stylesheet">*@
+@*<link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet">*@
+@*<link href="~/Content/assets/lib/animate/animate.min.css" rel="stylesheet">*@
+@*<link href="~/Content/assets//lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">*@
 
-
+<style>
+    .carousel-indicators [data-bs-target] {
+        height: 15px !important; /* Tăng chiều cao lên 15px */
+        width: 15px !important; /* Đảm bảo chiều rộng cũng tăng để giữ hình tròn */
+        border-radius: 50%; /* Giữ hình tròn */
+        margin: 0 7px; /* Điều chỉnh khoảng cách giữa các chấm */
+        border: 6px solid var(--bs-white);
+        border-radius: 15px;
+        padding: 0;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        background-color: var(--bs-secondary);
+        opacity: 1;
+    }
+    .header-carousel {
+        min-height: 100vh;
+    }
+</style>
 <!-- Carousel Start -->
 <div class="header-carousel">
-    <div id="carouselId" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+    <div id="carouselId" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
         <ol class="carousel-indicators">
             <li data-bs-target="#carouselId" data-bs-slide-to="0" class="active" aria-current="true" aria-label="First slide"></li>
             <li data-bs-target="#carouselId" data-bs-slide-to="1" aria-label="Second slide"></li>
         </ol>
         <div class="carousel-inner" role="listbox">
+            <!-- Slide 1 -->
             <div class="carousel-item active">
-                <img src="~/Content/assets/img/carousel-3.jpg" class="img-fluid w-100" alt="First slide" />
+                <img src="~/Content/assets/img/carousel-3.jpg" class="img-fluid w-100" alt="First slide" style="object-fit: cover; height: 600px;" />
                 <div class="carousel-caption">
-                    <div class="container py-4">
-                        <div class="row g-5">
+                    <div class="container py-5">
+                        <div class="row g-5 align-items-center">
                             <div class="col-lg-6 fadeInLeft animated" data-animation="fadeInLeft" data-delay="1s" style="animation-delay: 1s;">
-                                <div class="bg-secondary rounded p-5">
-                                    <h4 class="text-white mb-4">ĐẶT MUA ĐỒNG HỒ</h4>
-                                    <form>
-                                        <div class="row g-3">
-                                            <div class="col-12">
-                                                <select class="form-select" aria-label="Default select example">
-                                                    <option selected>Chọn Loại Đồng Hồ</option>
-                                                    <option value="1">Rolex Submariner</option>
-                                                    <option value="2">Omega Seamaster</option>
-                                                    <option value="3">Patek Philippe</option>
-                                                    <option value="4">Audemars Piguet</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="input-group">
-                                                    <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
-                                                        <span class="fas fa-map-marker-alt"></span> <span class="ms-1">Địa Chỉ</span>
-                                                    </div>
-                                                    <input class="form-control" type="text" placeholder="Nhập địa chỉ giao hàng" aria-label="Nhập địa chỉ giao hàng">
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="input-group">
-                                                    <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
-                                                        <span class="fas fa-phone-alt"></span><span class="ms-1">Số Điện Thoại</span>
-                                                    </div>
-                                                    <input class="form-control" type="text" placeholder="Nhập số điện thoại" aria-label="Nhập số điện thoại">
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <button class="btn btn-light w-100 py-2">Đặt Mua Ngay</button>
-                                            </div>
-                                        </div>
-                                    </form>
+                                <div class="bg-dark bg-opacity-75 rounded p-5 text-white">
+                                    <h2 class="text-white mb-3">Chào mừng đến với Luxury Watch</h2>
+                                    <p class="mb-4">Chúng tôi tự hào là đơn vị phân phối đồng hồ cao cấp chính hãng tại Việt Nam với hơn 10 năm kinh nghiệm. Mỗi sản phẩm đều được chọn lọc kỹ lưỡng, đảm bảo chất lượng và dịch vụ hoàn hảo.</p>
+                                    <a href="/products" class="btn btn-danger py-2 px-4">Khám phá ngay</a>
                                 </div>
                             </div>
                             <div class="col-lg-6 d-none d-lg-flex fadeInRight animated" data-animation="fadeInRight" data-delay="1s" style="animation-delay: 1s;">
                                 <div class="text-start">
                                     <h1 class="display-5 text-white">Giảm 15% cho đơn hàng đầu tiên</h1>
-                                    <p>Đồng hồ cao cấp chính hãng</p>
+                                    <p class="text-white">Đồng hồ cao cấp chính hãng – Phong cách dẫn đầu</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            @*<div class="carousel-item">
-                    <img src="~/Content/assets/img/carousel-1.jpg" class="img-fluid w-100" alt="First slide" />
-                    <div class="carousel-caption">
-                        <div class="container py-4">
-                            <div class="row g-5">
-                                <div class="col-lg-6 fadeInLeft animated" data-animation="fadeInLeft" data-delay="1s" style="animation-delay: 1s;">
-                                    <div class="bg-secondary rounded p-5">
-                                        <h4 class="text-white mb-4">CONTINUE CAR RESERVATION</h4>
-                                        <form>
-                                            <div class="row g-3">
-                                                <div class="col-12">
-                                                    <select class="form-select" aria-label="Default select example">
-                                                        <option selected>Select Your Car type</option>
-                                                        <option value="1">VW Golf VII</option>
-                                                        <option value="2">Audi A1 S-Line</option>
-                                                        <option value="3">Toyota Camry</option>
-                                                        <option value="4">BMW 320 ModernLine</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div class="input-group">
-                                                        <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
-                                                            <span class="fas fa-map-marker-alt"></span><span class="ms-1">Pick Up</span>
-                                                        </div>
-                                                        <input class="form-control" type="text" placeholder="Enter a City or Airport" aria-label="Enter a City or Airport">
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <a href="#" class="text-start text-white d-block mb-2">Need a different drop-off location?</a>
-                                                    <div class="input-group">
-                                                        <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
-                                                            <span class="fas fa-map-marker-alt"></span><span class="ms-1">Drop off</span>
-                                                        </div>
-                                                        <input class="form-control" type="text" placeholder="Enter a City or Airport" aria-label="Enter a City or Airport">
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div class="input-group">
-                                                        <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
-                                                            <span class="fas fa-calendar-alt"></span><span class="ms-1">Pick Up</span>
-                                                        </div>
-                                                        <input class="form-control" type="date">
-                                                        <select class="form-select ms-3" aria-label="Default select example">
-                                                            <option selected>12:00AM</option>
-                                                            <option value="1">1:00AM</option>
-                                                            <option value="2">2:00AM</option>
-                                                            <option value="3">3:00AM</option>
-                                                            <option value="4">4:00AM</option>
-                                                            <option value="5">5:00AM</option>
-                                                            <option value="6">6:00AM</option>
-                                                            <option value="7">7:00AM</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div class="input-group">
-                                                        <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
-                                                            <span class="fas fa-calendar-alt"></span><span class="ms-1">Drop off</span>
-                                                        </div>
-                                                        <input class="form-control" type="date">
-                                                        <select class="form-select ms-3" aria-label="Default select example">
-                                                            <option selected>12:00AM</option>
-                                                            <option value="1">1:00AM</option>
-                                                            <option value="2">2:00AM</option>
-                                                            <option value="3">3:00AM</option>
-                                                            <option value="4">4:00AM</option>
-                                                            <option value="5">5:00AM</option>
-                                                            <option value="6">6:00AM</option>
-                                                            <option value="7">7:00AM</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <button class="btn btn-light w-100 py-2">Book Now</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
+            <!-- Slide 2 -->
+            <div class="carousel-item">
+                <img src="~/Content/assets/img/carousel-3.jpg" class="img-fluid w-100" alt="Second slide" style="object-fit: cover; height: 600px;" />
+                <div class="carousel-caption">
+                    <div class="container py-5">
+                        <div class="row g-5 align-items-center">
+                            <div class="col-lg-6 fadeInLeft animated" data-animation="fadeInLeft" data-delay="1s" style="animation-delay: 1s;">
+                                <div class="bg-dark bg-opacity-75 rounded p-5 text-white">
+                                    <h2 class="text-white mb-3">Liên hệ với chúng tôi</h2>
+                                    <p class="mb-2"><i class="fas fa-map-marker-alt me-2"></i>123 Nguyễn Huệ, Q.1, TP.HCM</p>
+                                    <p class="mb-2"><i class="fas fa-envelope me-2"></i>info@luxurywatch.vn</p>
+                                    <p class="mb-4"><i class="fas fa-phone-alt me-2"></i>+84 28 3456 7890</p>
+                                    <a href="/contact" class="btn btn-danger py-2 px-4">Liên hệ ngay</a>
                                 </div>
-                                <div class="col-lg-6 d-none d-lg-flex fadeInRight animated" data-animation="fadeInRight" data-delay="1s" style="animation-delay: 1s;">
-                                    <div class="text-start">
-                                        <h1 class="display-5 text-white">Get 15% off your rental! Choose Your Model </h1>
-                                        <p>Treat yourself in USA</p>
-                                    </div>
+                            </div>
+                            <div class="col-lg-6 d-none d-lg-flex fadeInRight animated" data-animation="fadeInRight" data-delay="1s" style="animation-delay: 1s;">
+                                <div class="text-start">
+                                    <h1 class="display-5 text-white">Đồng hồ chính hãng</h1>
+                                    <p class="text-white">Bảo hành quốc tế – Uy tín hàng đầu</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>*@
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -491,8 +415,8 @@
                 <h1 class="text-white">Bạn Đang Tìm Kiếm?</h1>
                 <p class="text-white">Liên hệ ngay với chúng tôi để được tư vấn miễn phí.</p>
                 <div class="banner-btn">
-                    <a href="#" class="btn btn-secondary rounded-pill py-3 px-4 px-md-5 me-2">Zalo</a>
-                    <a href="#" class="btn btn-primary rounded-pill py-3 px-4 px-md-5 ms-2">Liên Hệ</a>
+                    <a href="https://zalo.me/0377977504" class="btn btn-secondary rounded-pill py-3 px-4 px-md-5 me-2">Zalo</a>
+                    <a href="/lien-he" class="btn btn-primary rounded-pill py-3 px-4 px-md-5 ms-2">Liên Hệ</a>
                 </div>
             </div>
         </div>
@@ -517,7 +441,7 @@
                         <img src="~/Content/assets/img/team-1.jpg" class="img-fluid rounded w-100" alt="Image">
                     </div>
                     <div class="team-content pt-4">
-                        <h4>NGUYỄN VĂN A</h4>
+                        <h4>Đào Duy Quyền</h4>
                         <p>Chuyên Gia Đồng Hồ</p>
                         <div class="team-icon d-flex justify-content-center">
                             <a class="btn btn-square btn-light rounded-circle mx-1" href=""><i class="fab fa-facebook-f"></i></a>
@@ -534,7 +458,7 @@
                         <img src="~/Content/assets/img/team-2.jpg" class="img-fluid rounded w-100" alt="Image">
                     </div>
                     <div class="team-content pt-4">
-                        <h4>TRẦN THỊ B</h4>
+                        <h4>Trần Gia Thành</h4>
                         <p>Chuyên Viên Tư Vấn</p>
                         <div class="team-icon d-flex justify-content-center">
                             <a class="btn btn-square btn-light rounded-circle mx-1" href=""><i class="fab fa-facebook-f"></i></a>
@@ -551,7 +475,7 @@
                         <img src="~/Content/assets/img/team-3.jpg" class="img-fluid rounded w-100" alt="Image">
                     </div>
                     <div class="team-content pt-4">
-                        <h4>LÊ VĂN C</h4>
+                        <h4>Nguyễn Hoàng T. Tùng</h4>
                         <p>Kỹ Thuật Viên</p>
                         <div class="team-icon d-flex justify-content-center">
                             <a class="btn btn-square btn-light rounded-circle mx-1" href=""><i class="fab fa-facebook-f"></i></a>

@@ -89,7 +89,9 @@
                                 <td>@stt</td>
                                 <td><img src="@item.Image" width="50" /></td>
                                 <td>@item.Title</td>
-                                <td>@item.CreatedDate.ToString("dd/MM/yyyy")</td>
+                                <td>
+                                    @(item.CreatedDate.HasValue ? item.CreatedDate.Value.ToString("dd MMM yyyy") : "")
+                                </td>
                                 <td class="text-center">
                                     <a href='#' data-id="@item.Id" class="btnActive">@Html.Raw(strCheck)</a>
                                 </td>

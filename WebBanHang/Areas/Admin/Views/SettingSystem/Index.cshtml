@@ -45,16 +45,20 @@
             <h3 class="card-title">@ViewBag.Title</h3>
 
         </div>
-        <div class="card-body">
-            <div id="load_page"></div>
-            @Html.Action("Partial_Setting", "SettingSystem")
-        </div>
-        <!-- /.card-body -->
-        <div class="card-footer">
+        @if (User.IsInRole("Admin"))
+        {
+            <div class="card-body">
+                <div id="load_page"></div>
+                @Html.Action("Partial_Setting", "SettingSystem")
+            </div>
+        }
+            
+            <!-- /.card-body -->
+            <div class="card-footer">
 
+            </div>
+            <!-- /.card-footer-->
         </div>
-        <!-- /.card-footer-->
-    </div>
     <!-- /.card -->
 
 </section>

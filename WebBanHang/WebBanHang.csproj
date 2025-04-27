@@ -51,8 +51,20 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Content\ckfinder\bin\Release\CKFinder.dll</HintPath>
     </Reference>
+    <Reference Include="ClosedXML, Version=0.104.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.104.2\lib\netstandard2.0\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="ClosedXML.Parser, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1d5f7376574c51ec, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.Parser.1.2.0\lib\netstandard2.0\ClosedXML.Parser.dll</HintPath>
+    </Reference>
     <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapper.2.1.66\lib\net461\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=3.1.1.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.3.1.1\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml.Framework, Version=3.1.1.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.Framework.3.1.1\lib\net46\DocumentFormat.OpenXml.Framework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
@@ -63,10 +75,19 @@
     <Reference Include="EntityFramework6.Npgsql, Version=6.4.3.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework6.Npgsql.6.4.3\lib\net461\EntityFramework6.Npgsql.dll</HintPath>
     </Reference>
+    <Reference Include="ExcelNumberFormat, Version=1.1.0.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelNumberFormat.1.1.0\lib\net20\ExcelNumberFormat.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=9.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.9.0.1\lib\netstandard2.0\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Bcl.HashCode, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.HashCode.1.1.1\lib\net461\Microsoft.Bcl.HashCode.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.IO.RecyclableMemoryStream, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IO.RecyclableMemoryStream.3.0.1\lib\netstandard2.0\Microsoft.IO.RecyclableMemoryStream.dll</HintPath>
+    </Reference>
     <Reference Include="Npgsql, Version=4.1.12.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
       <HintPath>..\packages\Npgsql.4.1.12\lib\net461\Npgsql.dll</HintPath>
     </Reference>
@@ -76,22 +97,36 @@
     <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="RBush, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RBush.4.0.0\lib\net47\RBush.dll</HintPath>
+    </Reference>
+    <Reference Include="SixLabors.Fonts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d998eea7b14cab13, processorArchitecture=MSIL">
+      <HintPath>..\packages\SixLabors.Fonts.1.0.0\lib\netstandard2.0\SixLabors.Fonts.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
     </Reference>
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
     </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.6.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.Cryptography.Xml, Version=8.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Xml.8.0.2\lib\net462\System.Security.Cryptography.Xml.dll</HintPath>
     </Reference>
     <Reference Include="System.Text.Encodings.Web, Version=4.0.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Text.Encodings.Web.4.6.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
@@ -99,6 +134,7 @@
     <Reference Include="System.Text.Json, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Text.Json.4.6.0\lib\net461\System.Text.Json.dll</HintPath>
     </Reference>
+    <Reference Include="System.Threading.Tasks" />
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
@@ -165,6 +201,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.AspNet.Identity.Core">
@@ -220,6 +257,7 @@
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminHomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ContactController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrderController.cs" />
@@ -230,6 +268,7 @@
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Areas\Admin\Controllers\SettingSystemController.cs" />
     <Compile Include="Areas\Admin\Controllers\StatisticalController.cs" />
+    <Compile Include="Areas\Admin\Filters\CustomAuthorizeAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
@@ -339,6 +378,10 @@
     <Compile Include="Migrations\202504250418341_UpdateUserModel.Designer.cs">
       <DependentUpon>202504250418341_UpdateUserModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202504260446480_Update123.cs" />
+    <Compile Include="Migrations\202504260446480_Update123.Designer.cs">
+      <DependentUpon>202504260446480_Update123.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CommonAbstract.cs" />
@@ -435,6 +478,168 @@
     <Content Include="Content\assets\lib\waypoints\waypoints.min.js" />
     <Content Include="Content\assets\lib\wow\wow.js" />
     <Content Include="Content\assets\lib\wow\wow.min.js" />
+    <Content Include="Content\assets\plugins\chart.js\Chart.bundle.js" />
+    <Content Include="Content\assets\plugins\chart.js\Chart.bundle.min.js" />
+    <Content Include="Content\assets\plugins\chart.js\Chart.css" />
+    <Content Include="Content\assets\plugins\chart.js\Chart.js" />
+    <Content Include="Content\assets\plugins\chart.js\Chart.min.css" />
+    <Content Include="Content\assets\plugins\chart.js\Chart.min.js" />
+    <Content Include="Content\assets\plugins\easing\easing.js" />
+    <Content Include="Content\assets\plugins\font-awesome-4.7.0\css\font-awesome.css" />
+    <Content Include="Content\assets\plugins\font-awesome-4.7.0\css\font-awesome.min.css" />
+    <Content Include="Content\assets\plugins\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\assets\plugins\font-awesome-4.7.0\HELP-US-OUT.txt" />
+    <Content Include="Content\assets\plugins\Isotope\isotope.pkgd.min.js" />
+    <Content Include="Content\assets\plugins\jquery-ui-1.12.1.custom\jquery-ui.css" />
+    <Content Include="Content\assets\plugins\jquery-ui-1.12.1.custom\jquery-ui.js" />
+    <Content Include="Content\assets\plugins\moment\locales.js" />
+    <Content Include="Content\assets\plugins\moment\locales.min.js" />
+    <Content Include="Content\assets\plugins\moment\locale\af.js" />
+    <Content Include="Content\assets\plugins\moment\locale\ar-dz.js" />
+    <Content Include="Content\assets\plugins\moment\locale\ar-kw.js" />
+    <Content Include="Content\assets\plugins\moment\locale\ar-ly.js" />
+    <Content Include="Content\assets\plugins\moment\locale\ar-ma.js" />
+    <Content Include="Content\assets\plugins\moment\locale\ar-sa.js" />
+    <Content Include="Content\assets\plugins\moment\locale\ar-tn.js" />
+    <Content Include="Content\assets\plugins\moment\locale\ar.js" />
+    <Content Include="Content\assets\plugins\moment\locale\az.js" />
+    <Content Include="Content\assets\plugins\moment\locale\be.js" />
+    <Content Include="Content\assets\plugins\moment\locale\bg.js" />
+    <Content Include="Content\assets\plugins\moment\locale\bm.js" />
+    <Content Include="Content\assets\plugins\moment\locale\bn-bd.js" />
+    <Content Include="Content\assets\plugins\moment\locale\bn.js" />
+    <Content Include="Content\assets\plugins\moment\locale\bo.js" />
+    <Content Include="Content\assets\plugins\moment\locale\br.js" />
+    <Content Include="Content\assets\plugins\moment\locale\bs.js" />
+    <Content Include="Content\assets\plugins\moment\locale\ca.js" />
+    <Content Include="Content\assets\plugins\moment\locale\cs.js" />
+    <Content Include="Content\assets\plugins\moment\locale\cv.js" />
+    <Content Include="Content\assets\plugins\moment\locale\cy.js" />
+    <Content Include="Content\assets\plugins\moment\locale\da.js" />
+    <Content Include="Content\assets\plugins\moment\locale\de-at.js" />
+    <Content Include="Content\assets\plugins\moment\locale\de-ch.js" />
+    <Content Include="Content\assets\plugins\moment\locale\de.js" />
+    <Content Include="Content\assets\plugins\moment\locale\dv.js" />
+    <Content Include="Content\assets\plugins\moment\locale\el.js" />
+    <Content Include="Content\assets\plugins\moment\locale\en-au.js" />
+    <Content Include="Content\assets\plugins\moment\locale\en-ca.js" />
+    <Content Include="Content\assets\plugins\moment\locale\en-gb.js" />
+    <Content Include="Content\assets\plugins\moment\locale\en-ie.js" />
+    <Content Include="Content\assets\plugins\moment\locale\en-il.js" />
+    <Content Include="Content\assets\plugins\moment\locale\en-in.js" />
+    <Content Include="Content\assets\plugins\moment\locale\en-nz.js" />
+    <Content Include="Content\assets\plugins\moment\locale\en-SG.js" />
+    <Content Include="Content\assets\plugins\moment\locale\eo.js" />
+    <Content Include="Content\assets\plugins\moment\locale\es-do.js" />
+    <Content Include="Content\assets\plugins\moment\locale\es-mx.js" />
+    <Content Include="Content\assets\plugins\moment\locale\es-us.js" />
+    <Content Include="Content\assets\plugins\moment\locale\es.js" />
+    <Content Include="Content\assets\plugins\moment\locale\et.js" />
+    <Content Include="Content\assets\plugins\moment\locale\eu.js" />
+    <Content Include="Content\assets\plugins\moment\locale\fa.js" />
+    <Content Include="Content\assets\plugins\moment\locale\fi.js" />
+    <Content Include="Content\assets\plugins\moment\locale\fil.js" />
+    <Content Include="Content\assets\plugins\moment\locale\fo.js" />
+    <Content Include="Content\assets\plugins\moment\locale\fr-ca.js" />
+    <Content Include="Content\assets\plugins\moment\locale\fr-ch.js" />
+    <Content Include="Content\assets\plugins\moment\locale\fr.js" />
+    <Content Include="Content\assets\plugins\moment\locale\fy.js" />
+    <Content Include="Content\assets\plugins\moment\locale\ga.js" />
+    <Content Include="Content\assets\plugins\moment\locale\gd.js" />
+    <Content Include="Content\assets\plugins\moment\locale\gl.js" />
+    <Content Include="Content\assets\plugins\moment\locale\gom-deva.js" />
+    <Content Include="Content\assets\plugins\moment\locale\gom-latn.js" />
+    <Content Include="Content\assets\plugins\moment\locale\gu.js" />
+    <Content Include="Content\assets\plugins\moment\locale\he.js" />
+    <Content Include="Content\assets\plugins\moment\locale\hi.js" />
+    <Content Include="Content\assets\plugins\moment\locale\hr.js" />
+    <Content Include="Content\assets\plugins\moment\locale\hu.js" />
+    <Content Include="Content\assets\plugins\moment\locale\hy-am.js" />
+    <Content Include="Content\assets\plugins\moment\locale\id.js" />
+    <Content Include="Content\assets\plugins\moment\locale\is.js" />
+    <Content Include="Content\assets\plugins\moment\locale\it-ch.js" />
+    <Content Include="Content\assets\plugins\moment\locale\it.js" />
+    <Content Include="Content\assets\plugins\moment\locale\ja.js" />
+    <Content Include="Content\assets\plugins\moment\locale\jv.js" />
+    <Content Include="Content\assets\plugins\moment\locale\ka.js" />
+    <Content Include="Content\assets\plugins\moment\locale\kk.js" />
+    <Content Include="Content\assets\plugins\moment\locale\km.js" />
+    <Content Include="Content\assets\plugins\moment\locale\kn.js" />
+    <Content Include="Content\assets\plugins\moment\locale\ko.js" />
+    <Content Include="Content\assets\plugins\moment\locale\ku.js" />
+    <Content Include="Content\assets\plugins\moment\locale\ky.js" />
+    <Content Include="Content\assets\plugins\moment\locale\lb.js" />
+    <Content Include="Content\assets\plugins\moment\locale\lo.js" />
+    <Content Include="Content\assets\plugins\moment\locale\lt.js" />
+    <Content Include="Content\assets\plugins\moment\locale\lv.js" />
+    <Content Include="Content\assets\plugins\moment\locale\me.js" />
+    <Content Include="Content\assets\plugins\moment\locale\mi.js" />
+    <Content Include="Content\assets\plugins\moment\locale\mk.js" />
+    <Content Include="Content\assets\plugins\moment\locale\ml.js" />
+    <Content Include="Content\assets\plugins\moment\locale\mn.js" />
+    <Content Include="Content\assets\plugins\moment\locale\mr.js" />
+    <Content Include="Content\assets\plugins\moment\locale\ms-my.js" />
+    <Content Include="Content\assets\plugins\moment\locale\ms.js" />
+    <Content Include="Content\assets\plugins\moment\locale\mt.js" />
+    <Content Include="Content\assets\plugins\moment\locale\my.js" />
+    <Content Include="Content\assets\plugins\moment\locale\nb.js" />
+    <Content Include="Content\assets\plugins\moment\locale\ne.js" />
+    <Content Include="Content\assets\plugins\moment\locale\nl-be.js" />
+    <Content Include="Content\assets\plugins\moment\locale\nl.js" />
+    <Content Include="Content\assets\plugins\moment\locale\nn.js" />
+    <Content Include="Content\assets\plugins\moment\locale\oc-lnc.js" />
+    <Content Include="Content\assets\plugins\moment\locale\pa-in.js" />
+    <Content Include="Content\assets\plugins\moment\locale\pl.js" />
+    <Content Include="Content\assets\plugins\moment\locale\pt-br.js" />
+    <Content Include="Content\assets\plugins\moment\locale\pt.js" />
+    <Content Include="Content\assets\plugins\moment\locale\ro.js" />
+    <Content Include="Content\assets\plugins\moment\locale\ru.js" />
+    <Content Include="Content\assets\plugins\moment\locale\sd.js" />
+    <Content Include="Content\assets\plugins\moment\locale\se.js" />
+    <Content Include="Content\assets\plugins\moment\locale\si.js" />
+    <Content Include="Content\assets\plugins\moment\locale\sk.js" />
+    <Content Include="Content\assets\plugins\moment\locale\sl.js" />
+    <Content Include="Content\assets\plugins\moment\locale\sq.js" />
+    <Content Include="Content\assets\plugins\moment\locale\sr-cyrl.js" />
+    <Content Include="Content\assets\plugins\moment\locale\sr.js" />
+    <Content Include="Content\assets\plugins\moment\locale\ss.js" />
+    <Content Include="Content\assets\plugins\moment\locale\sv.js" />
+    <Content Include="Content\assets\plugins\moment\locale\sw.js" />
+    <Content Include="Content\assets\plugins\moment\locale\ta.js" />
+    <Content Include="Content\assets\plugins\moment\locale\te.js" />
+    <Content Include="Content\assets\plugins\moment\locale\tet.js" />
+    <Content Include="Content\assets\plugins\moment\locale\tg.js" />
+    <Content Include="Content\assets\plugins\moment\locale\th.js" />
+    <Content Include="Content\assets\plugins\moment\locale\tk.js" />
+    <Content Include="Content\assets\plugins\moment\locale\tl-ph.js" />
+    <Content Include="Content\assets\plugins\moment\locale\tlh.js" />
+    <Content Include="Content\assets\plugins\moment\locale\tr.js" />
+    <Content Include="Content\assets\plugins\moment\locale\tzl.js" />
+    <Content Include="Content\assets\plugins\moment\locale\tzm-latn.js" />
+    <Content Include="Content\assets\plugins\moment\locale\tzm.js" />
+    <Content Include="Content\assets\plugins\moment\locale\ug-cn.js" />
+    <Content Include="Content\assets\plugins\moment\locale\uk.js" />
+    <Content Include="Content\assets\plugins\moment\locale\ur.js" />
+    <Content Include="Content\assets\plugins\moment\locale\uz-latn.js" />
+    <Content Include="Content\assets\plugins\moment\locale\uz.js" />
+    <Content Include="Content\assets\plugins\moment\locale\vi.js" />
+    <Content Include="Content\assets\plugins\moment\locale\x-pseudo.js" />
+    <Content Include="Content\assets\plugins\moment\locale\yo.js" />
+    <Content Include="Content\assets\plugins\moment\locale\zh-cn.js" />
+    <Content Include="Content\assets\plugins\moment\locale\zh-hk.js" />
+    <Content Include="Content\assets\plugins\moment\locale\zh-mo.js" />
+    <Content Include="Content\assets\plugins\moment\locale\zh-tw.js" />
+    <Content Include="Content\assets\plugins\moment\moment-with-locales.js" />
+    <Content Include="Content\assets\plugins\moment\moment-with-locales.min.js" />
+    <Content Include="Content\assets\plugins\moment\moment.min.js" />
+    <Content Include="Content\assets\plugins\OwlCarousel2-2.2.1\ajax-loader.gif" />
+    <Content Include="Content\assets\plugins\OwlCarousel2-2.2.1\animate.css" />
+    <Content Include="Content\assets\plugins\OwlCarousel2-2.2.1\owl.carousel.css" />
+    <Content Include="Content\assets\plugins\OwlCarousel2-2.2.1\owl.carousel.js" />
+    <Content Include="Content\assets\plugins\OwlCarousel2-2.2.1\owl.theme.default.css" />
+    <Content Include="Content\assets\plugins\OwlCarousel2-2.2.1\owl.video.play.png" />
+    <Content Include="Content\assets\plugins\themify-icons\fonts\themify.svg" />
+    <Content Include="Content\assets\plugins\themify-icons\themify-icons.css" />
     <Content Include="Content\assets_backup1\dist\css\adminlte.css" />
     <Content Include="Content\assets_backup1\dist\css\adminlte.min.css" />
     <Content Include="Content\assets_backup1\dist\css\alt\adminlte.components.css" />
@@ -3758,6 +3963,47 @@
     <Content Include="Content\assets\scss\bootstrap\scss\_type.scss" />
     <Content Include="Content\assets\scss\bootstrap\scss\_utilities.scss" />
     <Content Include="Content\assets\scss\bootstrap\scss\_variables.scss" />
+    <Content Include="Areas\Admin\Views\Contact\Detail.cshtml" />
+    <Content Include="Areas\Admin\Views\Contact\Index.cshtml" />
+    <Content Include="Content\assets\plugins\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\assets\plugins\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\assets\plugins\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\assets\plugins\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\assets\plugins\font-awesome-4.7.0\fonts\FontAwesome.otf" />
+    <Content Include="Content\assets\plugins\font-awesome-4.7.0\less\animated.less" />
+    <Content Include="Content\assets\plugins\font-awesome-4.7.0\less\bordered-pulled.less" />
+    <Content Include="Content\assets\plugins\font-awesome-4.7.0\less\core.less" />
+    <Content Include="Content\assets\plugins\font-awesome-4.7.0\less\fixed-width.less" />
+    <Content Include="Content\assets\plugins\font-awesome-4.7.0\less\font-awesome.less" />
+    <Content Include="Content\assets\plugins\font-awesome-4.7.0\less\icons.less" />
+    <Content Include="Content\assets\plugins\font-awesome-4.7.0\less\larger.less" />
+    <Content Include="Content\assets\plugins\font-awesome-4.7.0\less\list.less" />
+    <Content Include="Content\assets\plugins\font-awesome-4.7.0\less\mixins.less" />
+    <Content Include="Content\assets\plugins\font-awesome-4.7.0\less\path.less" />
+    <Content Include="Content\assets\plugins\font-awesome-4.7.0\less\rotated-flipped.less" />
+    <Content Include="Content\assets\plugins\font-awesome-4.7.0\less\screen-reader.less" />
+    <Content Include="Content\assets\plugins\font-awesome-4.7.0\less\stacked.less" />
+    <Content Include="Content\assets\plugins\font-awesome-4.7.0\less\variables.less" />
+    <Content Include="Content\assets\plugins\font-awesome-4.7.0\scss\font-awesome.scss" />
+    <Content Include="Content\assets\plugins\font-awesome-4.7.0\scss\_animated.scss" />
+    <Content Include="Content\assets\plugins\font-awesome-4.7.0\scss\_bordered-pulled.scss" />
+    <Content Include="Content\assets\plugins\font-awesome-4.7.0\scss\_core.scss" />
+    <Content Include="Content\assets\plugins\font-awesome-4.7.0\scss\_fixed-width.scss" />
+    <Content Include="Content\assets\plugins\font-awesome-4.7.0\scss\_icons.scss" />
+    <Content Include="Content\assets\plugins\font-awesome-4.7.0\scss\_larger.scss" />
+    <Content Include="Content\assets\plugins\font-awesome-4.7.0\scss\_list.scss" />
+    <Content Include="Content\assets\plugins\font-awesome-4.7.0\scss\_mixins.scss" />
+    <Content Include="Content\assets\plugins\font-awesome-4.7.0\scss\_path.scss" />
+    <Content Include="Content\assets\plugins\font-awesome-4.7.0\scss\_rotated-flipped.scss" />
+    <Content Include="Content\assets\plugins\font-awesome-4.7.0\scss\_screen-reader.scss" />
+    <Content Include="Content\assets\plugins\font-awesome-4.7.0\scss\_stacked.scss" />
+    <Content Include="Content\assets\plugins\font-awesome-4.7.0\scss\_variables.scss" />
+    <Content Include="Content\assets\plugins\moment\locales.min.js.map" />
+    <Content Include="Content\assets\plugins\moment\moment-with-locales.min.js.map" />
+    <Content Include="Content\assets\plugins\moment\moment.min.js.map" />
+    <Content Include="Content\assets\plugins\themify-icons\fonts\themify.eot" />
+    <Content Include="Content\assets\plugins\themify-icons\fonts\themify.ttf" />
+    <Content Include="Content\assets\plugins\themify-icons\fonts\themify.woff" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -3783,7 +4029,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
@@ -3834,6 +4079,7 @@
     <Content Include="Views\Review\_Load_Review.cshtml" />
     <Content Include="Views\Menu\_MenuNews.cshtml" />
     <Content Include="Views\Products\_ProductRelate.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3928,6 +4174,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202504250418341_UpdateUserModel.resx">
       <DependentUpon>202504250418341_UpdateUserModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202504260446480_Update123.resx">
+      <DependentUpon>202504260446480_Update123.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

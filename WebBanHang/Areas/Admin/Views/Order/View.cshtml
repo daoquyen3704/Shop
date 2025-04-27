@@ -59,7 +59,9 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Ngày tạo</label>
-                        <p class="form-control">@Model.CreatedDate.ToString("dd/MM/yyyy")</p>
+                        <p class="form-control">@((Model.CreatedDate.HasValue ? Model.CreatedDate.Value.ToString("dd/MM/yyyy") : ""))</p>
+
+
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -73,7 +75,29 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Trạng thái</label>
-                        <p class="form-control">@(Model.TypePayment == 1 ? "Chưa thanh toán" : "Đã thanh toán")</p>
+                        <p class="form-control">
+                            @switch (Model.Status)
+                            {
+                                case 0:
+                                    <span class="badge badge-warning">Chờ xác nhận</span>
+                                    break;
+                                case 1:
+                                    <span class="badge badge-info">Chưa thanh toán</span>
+                                    break;
+                                case 2:
+                                    <span class="badge badge-success">Đã thanh toán</span>
+                                    break;
+                                case 3:
+                                    <span class="badge badge-primary">Hoàn thành</span>
+                                    break;
+                                case 4:
+                                    <span class="badge badge-danger">Hủy</span>
+                                    break;
+                                default:
+                                    <span class="badge badge-danger">Hủy</span>
+                                    break;
+                            }
+                        </p>
                     </div>
                 </div>
                 <div class="col-md-6">

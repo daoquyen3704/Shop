@@ -34,12 +34,7 @@ namespace WebBanHang.Controllers
             }
             return View("Partial_Subcribe", req);
         }
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
+        
 
         public ActionResult Refresh()
         {
@@ -63,5 +58,11 @@ namespace WebBanHang.Controllers
 
             return View();
         }
+
+        public ActionResult About()
+        {
+            return View();
+        }
+
     }
 }

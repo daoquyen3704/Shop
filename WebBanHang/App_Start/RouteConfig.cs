@@ -56,6 +56,12 @@ namespace WebBanHang
                 namespaces: new[] { "WebBanHang.Controllers" }
             );
             routes.MapRoute(
+                name: "Tin Tức",
+                url: "tin-tuc",
+                defaults: new { controller = "News", action = "Index", alias = UrlParameter.Optional },
+                namespaces: new[] { "WebBanHang.Controllers" }
+            );
+            routes.MapRoute(
                   name: "CheckOut",
                   url: "thanh-toan",
                   defaults: new { controller = "ShoppingCart", action = "CheckOut", alias = UrlParameter.Optional },
@@ -67,10 +73,11 @@ namespace WebBanHang
                 defaults: new { controller = "Products", action = "ProductCategory", id = UrlParameter.Optional },
                 namespaces: new[] { "WebBanHang.Controllers" }
             );
+
             routes.MapRoute(
-                name: "NewsList",
-                url: "tin-tuc",
-                defaults: new { controller = "News", action = "Index", id = UrlParameter.Optional },
+                name: "AboutUs",
+                url: "ve-chung-toi",
+                defaults: new { controller = "Home", action = "About", id = UrlParameter.Optional },
                 namespaces: new[] { "WebBanHang.Controllers" }
             );
             routes.MapRoute(

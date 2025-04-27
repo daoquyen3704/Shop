@@ -6,11 +6,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebBanHang.Models;
+using WebBanHang.Areas.Admin.Filters;
 
 namespace WebBanHang.Areas.Admin.Controllers
 {
     // Tạm thời bỏ Authorize để tạo role Admin đầu tiên
-     [Authorize(Roles = "Admin")]
+    [CustomAuthorize(Roles = "Admin")]
     public class RoleController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
