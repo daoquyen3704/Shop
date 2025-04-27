@@ -10,11 +10,11 @@ using System.Text;
 using PagedList;
 using PagedList.Mvc;
 using System.Data.Entity;
+using WebBanHang.Areas.Admin.Filters;
 
 namespace WebBanHang.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin,Employee")]
-
+    [CustomAuthorize(Roles = "Admin,Employee")]
     public class ProductsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -40,6 +40,8 @@ namespace WebBanHang.Areas.Admin.Controllers
             return View(pagedItems);
         }
 
+
+        
         [HttpGet]
         public ActionResult Add()
         {
@@ -47,6 +49,7 @@ namespace WebBanHang.Areas.Admin.Controllers
             return View();
         }
 
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Add(Product model, List<string> Images, List<int> rDefault)
@@ -153,6 +156,7 @@ namespace WebBanHang.Areas.Admin.Controllers
             return View(model);
         }
 
+        
         public ActionResult Edit(int id)
         {
             var product = db.Products.Find(id);
@@ -164,6 +168,7 @@ namespace WebBanHang.Areas.Admin.Controllers
             return View(product);
         }
 
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Product model, List<string> Images, List<int> rDefault)
@@ -241,6 +246,7 @@ namespace WebBanHang.Areas.Admin.Controllers
             return View(model);
         }
 
+        [CustomAuthorize(Roles = "Admin")]
         [HttpPost]
         public JsonResult ToggleStatus(int id, string field)
         {
@@ -270,7 +276,7 @@ namespace WebBanHang.Areas.Admin.Controllers
         }
 
 
-
+        
         [HttpPost]
         public ActionResult Delete(int id)
         {
@@ -299,6 +305,7 @@ namespace WebBanHang.Areas.Admin.Controllers
             }
         }
 
+        
         [HttpPost]
         public ActionResult DeleteAll(string ids)
         {

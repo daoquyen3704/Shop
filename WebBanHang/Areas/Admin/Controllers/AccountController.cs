@@ -10,10 +10,11 @@ using System.Web;
 using System.Web.Mvc;
 using WebBanHang;
 using WebBanHang.Models;
+using WebBanHang.Areas.Admin.Filters;
 
 namespace WebBanHang.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -54,6 +55,7 @@ namespace WebBanHang.Areas.Admin.Controllers
         }
 
         // GET: Admin/Account
+        [CustomAuthorize(Roles = "Admin,Employee")]
         public ActionResult Index()
         {
             var items = db.Users.ToList();
@@ -129,7 +131,8 @@ namespace WebBanHang.Areas.Admin.Controllers
         }
         //
         // GET: /Account/Register
-        [AllowAnonymous]
+
+        [CustomAuthorize(Roles = "Admin")]
         public ActionResult Create()
         {
             ViewBag.Role = new SelectList(db.Roles.ToList(), "Id", "Name");
@@ -139,7 +142,7 @@ namespace WebBanHang.Areas.Admin.Controllers
         //
         // POST: /Account/Register
         [HttpPost]
-        [AllowAnonymous]
+        [CustomAuthorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(CreateAccountViewModel model)
         {
@@ -214,6 +217,7 @@ namespace WebBanHang.Areas.Admin.Controllers
             }
         }
 
+        [CustomAuthorize(Roles = "Admin")]
         public ActionResult Edit(string id)
         {
             var item = db.Users.Find(id);
@@ -225,6 +229,7 @@ namespace WebBanHang.Areas.Admin.Controllers
             return View(item);
         }
 
+        [CustomAuthorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(ApplicationUser model)
@@ -249,9 +254,18 @@ namespace WebBanHang.Areas.Admin.Controllers
                 }
             }
             ViewBag.Role = new SelectList(db.Roles.ToList(), "Id", "Name");
-            return View(model);
+            var userInDb = await UserManager.FindByIdAsync(model.Id);
+            if (userInDb == null)
+            {
+                // THÊM LOG TẠM: Báo lỗi ra cho dễ trace
+                ModelState.AddModelError("", "Không tìm thấy user để edit.");
+                return RedirectToAction("Index");
+            }
+
+            return View(userInDb);
         }
 
+        [CustomAuthorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult> Delete(string id)
         {
@@ -268,6 +282,7 @@ namespace WebBanHang.Areas.Admin.Controllers
             return Json(new { success = false, message = "Tài khoản không tồn tại" });
         }
 
+        [CustomAuthorize(Roles = "Admin")]
         public ActionResult ChangePassword(string id)
         {
             var user = db.Users.Find(id);
@@ -280,6 +295,7 @@ namespace WebBanHang.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [CustomAuthorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ChangePassword(string userId, string newPassword)
         {

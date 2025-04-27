@@ -87,10 +87,10 @@
                                 <td><input type="checkbox" class="cbkItem" value="@item.Id" /></td>
                                 <td>@stt</td>
                                 <td>@item.Title</td>
-                                <td>@item.CreatedDate.ToString("dd/MM/yyyy")</td>
+                                <td>@(item.CreatedDate.HasValue ? item.CreatedDate.Value.ToString("dd/MM/yyyy HH:mm") : "")</td>
                                 @*<td class="text-center">
-                                        <a href='#' data-id="@item.Id" class="btnActive">@Html.Raw(strCheck)</a>
-                                    </td>*@
+            <a href='#' data-id="@item.Id" class="btnActive">@Html.Raw(strCheck)</a>
+        </td>*@
                                 <td>
                                     <a href="/admin/productscategory/edit/@item.Id" class="btn btn-sm btn-primary">Sửa</a>
                                     <a href="#" data-id="@item.Id" class="btn btn-sm btn-danger btnDelete">Xóa</a>

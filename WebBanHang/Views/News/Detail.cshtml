@@ -137,8 +137,9 @@
                     <div class="position-relative">
                         @*<img class="img-fluid rounded w-100" src="@Model.Image" alt="@Model.Title">*@
                         <div class="position-absolute bg-primary rounded p-4 d-flex flex-column align-items-center justify-content-center" style="top: 0; right: 0;">
-                            <h4 class="text-uppercase text-white mb-0">@Model.CreatedDate.ToString("dd")</h4>
-                            <p class="text-white mb-0">@Model.CreatedDate.ToString("MMM")</p>
+                            <p class="text-white mb-0">
+                                @(Model.CreatedDate.HasValue ? Model.CreatedDate.Value.ToString("dd MMM yyyy") : "")
+                            </p>
                         </div>
                     </div>
                     <div class="bg-light rounded p-4">

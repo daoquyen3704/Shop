@@ -1,38 +1,105 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Đặt hàng thành công";
 }
 
+<link rel="stylesheet" href="~/Content/assets/styles/categories_styles.css" />
+<link rel="stylesheet" href="~/Content/assets/styles/categories_responsive.css" />
 
-<link rel="stylesheet" type="text/css" href="~/Content/assets/styles/categories_styles.css">
-<link rel="stylesheet" type="text/css" href="~/Content/assets/styles/categories_responsive.css">
-<div class="container product_section_container">
-    <div class="row">
-        <div class="col product_section clearfix">
+<style>
+    /* Custom styles for the success page */
+    .success-container {
+        min-height: 50vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        padding: 20px;
+        font-family: 'Arial', sans-serif;
+    }
 
-            <!-- Breadcrumbs -->
+    .success-box {
+        background-color: #ffffff;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        padding: 40px;
+        text-align: center;
+        max-width: 500px;
+        width: 100%;
+        animation: fadeIn 0.5s ease-in-out;
+    }
 
-            <div class="breadcrumbs d-flex flex-row align-items-center">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li class="active"><a href="/"><i class="fa fa-angle-right" aria-hidden="true"></i>Giỏ hàng</a></li>
-                </ul>
-            </div>
+        .success-box h2 {
+            color: #28a745;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
 
-            <!-- Sidebar -->
-            <!-- Main Content -->
+        .success-box p {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
 
-            <div class="row">
-                <div class="col-md-12" id="load_data">
-                    <h2>Bạn đã mua hàng thành công</h2>
-                </div>
+    .btn-home {
+        background-color: #ea001e;
+        color: #fff;
+        padding: 12px 30px;
+        border-radius: 25px;
+        font-size: 16px;
+        font-weight: 600;
+        text-transform: uppercase;
+        transition: background-color 0.3s ease;
+        text-decoration: none;
+    }
 
-            </div>
-        </div>
+        .btn-home:hover {
+            background-color: #ea001e;
+            text-decoration: none;
+        }
+
+    /* Animation for fade-in effect */
+    @@keyframes fadeIn {
+        0% {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Responsive adjustments */
+    @@media (max-width: 576px) {
+        .success-box {
+            padding: 20px;
+        }
+
+            .success-box h2 {
+                font-size: 24px;
+            }
+
+            .success-box p {
+                font-size: 14px;
+            }
+
+        .btn-home {
+            padding: 10px 20px;
+            font-size: 14px;
+        }
+    }
+</style>
+
+<div class="success-container">
+    <div class="success-box">
+        <h2 class="text-success">Bạn đã mua hàng thành công</h2>
+        <p>Cảm ơn bạn đã tin tưởng và đặt hàng tại cửa hàng của chúng tôi.</p>
+        <a href="/" class="btn-home">Quay về trang chủ</a>
     </div>
 </div>
 
-@section scripts{
+@section scripts {
     <script src="~/Content/assets/js/categories_custom.js"></script>
 }
-

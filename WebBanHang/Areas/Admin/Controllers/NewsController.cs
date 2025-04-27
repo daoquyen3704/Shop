@@ -11,6 +11,7 @@ using System.Text;
 
 namespace WebBanHang.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin,Employee")]
     public class NewsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -51,8 +52,8 @@ namespace WebBanHang.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                model.CreatedDate = DateTime.Now;
-                model.ModifiedDate = DateTime.Now;
+                model.CreatedDate = DateTime.UtcNow.AddHours(7); // giờ Việt Nam
+                model.ModifiedDate = DateTime.UtcNow.AddHours(7); // nếu cần
                 model.Alias = WebBanHang.Models.Common.Filter.FilterChar(model.Title);
                 model.CategoryId = 1;
 
@@ -79,11 +80,22 @@ namespace WebBanHang.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                model.ModifiedDate = DateTime.Now;
-                model.Alias = WebBanHang.Models.Common.Filter.FilterChar(model.Title);
-                model.CategoryId = 1;
+                var item = db.News.Find(model.Id);
+                if (item == null)
+                {
+                    return HttpNotFound();
+                }
 
-                db.Entry(model).State = System.Data.Entity.EntityState.Modified;
+                item.Title = model.Title;
+                item.Image = model.Image;
+                item.Description = model.Description;
+                item.Detail = model.Detail;
+                item.IsActive = model.IsActive;
+                item.SeoTitle = model.SeoTitle;
+                item.SeoDescription = model.SeoDescription;
+                item.SeoKeywords = model.SeoKeywords;
+                item.ModifiedDate = DateTime.UtcNow.AddHours(7); // cập nhật ngày sửa
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

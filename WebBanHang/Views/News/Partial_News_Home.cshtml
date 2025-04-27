@@ -10,7 +10,9 @@
                         <img src="@item.Image" class="img-fluid rounded-top w-100" alt="@item.Title">
                     </div>
                     <div class="blog-content rounded-bottom p-4">
-                        <div class="blog-date">@item.CreatedDate.ToString("dd MMM yyyy")</div>
+                        <div class="blog-date">
+                            @(item.CreatedDate.HasValue ? item.CreatedDate.Value.ToString("dd MMM yyyy") : "")
+                        </div>
                         <div class="blog-comment my-3">
                             <div class="small"><span class="fa fa-user text-primary"></span><span class="ms-2">@item.CreatedBy</span></div>
                         </div>

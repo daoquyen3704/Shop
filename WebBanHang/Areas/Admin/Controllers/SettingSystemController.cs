@@ -5,9 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using WebBanHang.Models;
 using WebBanHang.Models.EF;
+using WebBanHang.Areas.Admin.Filters;
 
 namespace WebBanHang.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin,Employee")]
     public class SettingSystemController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

@@ -6,6 +6,7 @@
 
 }
 
+<link rel="stylesheet" href="~/Content/Clients/dist/css/adminlte.min.css">
 <div class="card-body login-card-body">
     <p class="login-box-msg">Sign in to start your session</p>
     @using (Html.BeginForm("Login", "Account", FormMethod.Post))
@@ -21,14 +22,14 @@
             </div>
         </div>
         <div class="input-group mb-3">
-            @Html.TextBoxFor(x => x.Password, new { @class = "form-control", @placeholder = "Mật khẩu" })
-            @*<input type="password" class="form-control" placeholder="Password">*@
+            @Html.PasswordFor(x => x.Password, new { @class = "form-control", @placeholder = "Mật khẩu" })
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-lock"></span>
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col-8">
                 <div class="icheck-primary">
