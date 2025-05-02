@@ -14,7 +14,7 @@ using System.Web;
 
 namespace WebBanHang.Controllers
 {
-    [Authorize]
+    
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -154,6 +154,14 @@ namespace WebBanHang.Controllers
             }
 
             return Json(new { success = false, message = "Không có file nào được chọn." });
+        }
+
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult ExternalLogin(string provider, string returnUrl)
+        {
+            return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
         }
 
 
@@ -382,14 +390,7 @@ namespace WebBanHang.Controllers
 
         //
         // POST: /Account/ExternalLogin
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult ExternalLogin(string provider, string returnUrl)
-        {
-            // Request a redirect to the external login provider
-            return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
-        }
+        
 
         //
         // GET: /Account/SendCode
@@ -442,7 +443,7 @@ namespace WebBanHang.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("Index", "Home", new { area = "" });
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -484,7 +485,13 @@ namespace WebBanHang.Controllers
                     if (result.Succeeded)
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                        return RedirectToLocal(returnUrl);
+                        // Thêm dòng này để gán role "Customer"
+                        await UserManager.AddToRoleAsync(user.Id, "Customer");
+
+                        // Debug: Kiểm tra và ghi log
+                        System.Diagnostics.Debug.WriteLine("User registered with Google: " + user.Email);
+
+                        return RedirectToAction("Index", "Home");  // Thay vì dùng RedirectToLocal
                     }
                 }
                 AddErrors(result);
@@ -554,6 +561,18 @@ namespace WebBanHang.Controllers
 
         private ActionResult RedirectToLocal(string returnUrl)
         {
+            // Thêm kiểm tra vai trò người dùng
+            if (User.Identity.IsAuthenticated)
+            {
+                var userId = User.Identity.GetUserId();
+                // Nếu là Customer và returnUrl dẫn đến trang Admin, chuyển về Home
+                if (UserManager.IsInRole(userId, "Customer") &&
+                    returnUrl != null && returnUrl.Contains("/Admin"))
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+
             if (Url.IsLocalUrl(returnUrl))
             {
                 return Redirect(returnUrl);
