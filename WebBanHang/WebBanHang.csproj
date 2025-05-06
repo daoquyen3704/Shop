@@ -280,6 +280,7 @@
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
+    <Compile Include="Controllers\WishListController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -383,6 +384,10 @@
     <Compile Include="Migrations\202504260446480_Update123.Designer.cs">
       <DependentUpon>202504260446480_Update123.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202505050857520_AddWishList.cs" />
+    <Compile Include="Migrations\202505050857520_AddWishList.Designer.cs">
+      <DependentUpon>202505050857520_AddWishList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CommonAbstract.cs" />
@@ -405,6 +410,7 @@
     <Compile Include="Models\EF\Subcribe.cs" />
     <Compile Include="Models\EF\SystemSetting.cs" />
     <Compile Include="Models\EF\ThongKe.cs" />
+    <Compile Include="Models\EF\WishList.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\OrderViewModel.cs" />
@@ -4081,11 +4087,13 @@
     <Content Include="Views\Menu\_MenuNews.cshtml" />
     <Content Include="Views\Products\_ProductRelate.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\WishList\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Views\ThongKe\" />
+    <Folder Include="Areas\Admin\Views\WishList\" />
     <Folder Include="Content\ckfinder\userfiles\" />
     <Folder Include="Content\images\avatar\" />
     <Folder Include="Views\Category\" />
@@ -4179,6 +4187,9 @@
     <EmbeddedResource Include="Migrations\202504260446480_Update123.resx">
       <DependentUpon>202504260446480_Update123.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505050857520_AddWishList.resx">
+      <DependentUpon>202505050857520_AddWishList.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -4198,9 +4209,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>58939</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44313/</IISUrl>
-          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
-          <IISAppRootUrl>https://localhost:44313/</IISAppRootUrl>
+          <IISUrl>https://localhost:44314/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -14,7 +14,7 @@ namespace WebBanHang.Models.EF
             this.ProductImage = new HashSet<ProductImage>();
             this.OrderDetails = new HashSet<OrderDetail>();
             this.ReviewProducts = new HashSet<ReviewProduct>();
-
+            this.WishLists = new HashSet<WishList>();
         }
 
         [Key]
@@ -59,5 +59,6 @@ namespace WebBanHang.Models.EF
         public virtual ICollection<ProductImage> ProductImage { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public virtual ICollection<ReviewProduct> ReviewProducts { get; set; }
+        public virtual ICollection<WishList> WishLists { get; set; }
     }
 }

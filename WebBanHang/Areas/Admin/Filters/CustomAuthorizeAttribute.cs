@@ -7,8 +7,6 @@ namespace WebBanHang.Areas.Admin.Filters
 {
     public class CustomAuthorizeAttribute : AuthorizeAttribute
     {
-        public new string Roles { get; set; } // Danh sách vai trò được phép, ví dụ: "Admin,Manager"
-
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
             // Kiểm tra xem người dùng đã đăng nhập chưa
@@ -55,9 +53,7 @@ namespace WebBanHang.Areas.Admin.Filters
                 // Render view hiện tại để giữ giao diện
                 filterContext.Result = new ViewResult
                 {
-                    ViewName = filterContext.RouteData.Values["action"].ToString(),
-                    ViewData = filterContext.Controller.ViewData,
-                    TempData = filterContext.Controller.TempData
+                    ViewName = filterContext.RouteData.Values["action"].ToString()
                 };
             }
         }

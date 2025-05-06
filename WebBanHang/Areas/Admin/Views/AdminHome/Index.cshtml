@@ -32,28 +32,64 @@
 </section>
 
 <section class="content">
+    <!-- Dashboard Stats -->
+    <div class="row">
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>@ViewBag.TotalOrdersToday</h3>
+                    <p>Đơn hàng hôm nay</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-success">
+                <div class="inner">
+                    <h3>@ViewBag.TotalInventory</h3>
+                    <p>Tổng số lượng hàng trong kho</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-box"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-warning">
+                <div class="inner">
+                    <h3>@ViewBag.TotalInventoryValue.ToString("N0") VNĐ</h3>
+                    <p>Tổng giá trị kho hàng</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-money-bill"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Orders List -->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Danh sách đơn hàng</h3>
+            <h3 class="card-title">Danh sách đơn hàng chờ xác nhận</h3>
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                     <i class="fas fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                    <i class="fas fa-times"></i>
                 </button>
             </div>
         </div>
         <div class="card-body">
             @if (Model != null && Model.Any())
             {
-                <table class="table table-bordered">
+                <table class="table table-bordered" id="orderTable">
                     <thead>
                         <tr>
                             <th>#</th>
                             <th>Mã đơn hàng</th>
                             <th>Khách hàng</th>
                             <th>Số điện thoại</th>
+                            <th>Email</th>
                             <th>Ngày đặt</th>
                             <th>Tổng tiền</th>
                             <th>Trạng thái</th>
@@ -65,51 +101,22 @@
                             var i = 1;
                             foreach (var order in Model)
                             {
-                                                <tr>
-                                                    <td>@i</td>
-                                                    <td>@order.Code</td>
-                                                    <td>@order.CustomerName</td>
-                                                    <td>@order.Phone</td>
-                                                    <td>@order.CreatedDate?.ToString("dd/MM/yyyy HH:mm")</td>
-                                                    <td>@order.TotalAmount.ToString("N0") VNĐ</td>
-                                                    <td>
-                                                        @switch (order.Status)
-                                                        {
-                                                            case 0:
-                                                                <span class="badge badge-warning">Chờ xác nhận</span>
-                                                                break;
-                                                            case 1:
-                                                                <span class="badge badge-info">Chưa thanh toán</span>
-                                                                break;
-                                                            case 2:
-                                                                <span class="badge badge-success">Đã thanh toán</span>
-                                                                break;
-                                                            case 3:
-                                                                <span class="badge badge-primary">Hoàn thành</span>
-                                                                break;
-                                                            case 4:
-                                                                <span class="badge badge-danger">Hủy</span>
-                                                                break;
-                                                            default:
-                                                                <span class="badge badge-danger">Hủy</span>
-                                                                break;
-                                                        }
-                                                    </td>
-                                                    <td>
-                                                        @if (User.IsInRole("Admin"))
-                                                        {
-                                                            if (order.Status == 0)
-                                                            {
-                                                                <a href="/admin/order/confirm/@order.Id" class="btn btn-sm btn-success">Xác nhận</a>
-                                                            }
-                                                            if (order.Status != 4 && order.Status != 3)
-                                                            {
-                                                                <a href="/admin/order/cancel/@order.Id" class="btn btn-sm btn-danger">Hủy</a>
-                                                            }
-                                                        }
-                                                        <a href="/admin/order/details/@order.Id" class="btn btn-sm btn-info">Chi tiết</a>
-                                                    </td>
-                                                </tr>
+                                <tr id="order-@order.Id">
+                                    <td>@i</td>
+                                    <td>@order.Code</td>
+                                    <td>@order.CustomerName</td>
+                                    <td>@order.Phone</td>
+                                    <td>@order.Email</td>
+                                    <td>@order.CreatedDate?.ToString("dd/MM/yyyy HH:mm")</td>
+                                    <td>@order.TotalAmount.ToString("N0") VNĐ</td>
+                                    <td>
+                                        <span class="badge badge-warning">Chờ xác nhận</span>
+                                    </td>
+                                    <td>
+                                        <button onclick="confirmOrder(@order.Id)" class="btn btn-sm btn-success">Xác nhận</button>
+                                        <a href="/admin/order/details/@order.Id" class="btn btn-sm btn-info">Chi tiết</a>
+                                    </td>
+                                </tr>
                                 i++;
                             }
                         }
@@ -118,11 +125,60 @@
             }
             else
             {
-                <p>Không có đơn hàng nào.</p>
+                <p>Không có đơn hàng nào cần xác nhận.</p>
             }
         </div>
         <div class="card-footer">
-            Tổng số đơn hàng: @(Model?.Count() ?? 0)
+            Tổng số đơn hàng chờ xác nhận: @(Model?.Count() ?? 0)
         </div>
     </div>
 </section>
+
+@section Scripts {
+    <script>
+        function confirmOrder(orderId) {
+            if (confirm('Bạn có chắc chắn muốn xác nhận đơn hàng này?')) {
+                $.ajax({
+                    url: '/Admin/AdminHome/ConfirmOrder',
+                    type: 'POST',
+                    data: { id: orderId },
+                    success: function (result) {
+                        if (result.success) {
+                            toastr.success(result.message);
+                            $('#order-' + orderId).fadeOut(500, function() {
+                                $(this).remove();
+                                updateOrderCount();
+setTimeout(function() {
+if (window.parent && window.parent.location) {
+                                        window.parent.location.reload(); // Tải lại trang cha
+                                    } else {
+                                    window.location.reload(); // Fallback nếu không có trang cha
+                                    }
+                                }, 1000);
+                            });
+                        } else {
+                            toastr.error(result.message);
+                        }
+                    },
+                    error: function () {
+                        toastr.error('Có lỗi xảy ra khi xác nhận đơn hàng');
+                    }
+                });
+            }
+        }
+
+        function updateOrderCount() {
+            var currentCount = parseInt($('.card-footer').text().match(/\d+/)[0]);
+            $('.card-footer').text('Tổng số đơn hàng chờ xác nhận: ' + (currentCount - 1));
+        }
+
+        // Tự động tải lại trang cha mỗi 5 phút
+        setInterval(function() {
+if (window.parent && window.parent.location) {
+                window.parent.location.reload();
+            } else {
+            window.location.reload();
+}
+        }, 300000);
+    </script>
+}

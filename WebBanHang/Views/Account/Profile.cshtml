@@ -47,8 +47,10 @@
                             else
                             {
                                 <img src="@Model.Avatar" class="rounded-circle profile-avatar"
-                                     style="width: 150px; height: 150px; object-fit: cover;" alt="Profile" />
+                                     style="width: 150px; height: 150px; object-fit: cover;" alt="Profile"
+                                     data-bs-toggle="modal" data-bs-target="#avatarModal" />
                             }
+
                             <button type="button" class="btn btn-primary btn-sm rounded-circle position-absolute bottom-0 end-0 btn-camera">
                                 <i class="fas fa-camera"></i>
                             </button>
@@ -61,7 +63,7 @@
                 <div class="card border-0 rounded-3 shadow-lg">
                     <div class="card-body p-0">
                         <div class="list-group list-group-flush">
-                            <a href="#" class="list-group-item list-group-item-action active">
+                            <a href="@Url.Action("Profile", "Account")" class="list-group-item list-group-item-action active">
                                 <i class="fas fa-user me-2"></i>Thông Tin Cá Nhân
                             </a>
                             <a href="#" class="list-group-item list-group-item-action">
@@ -138,19 +140,66 @@
     </div>
 </div>
 <!-- Profile End -->
+<!-- Modal để xem ảnh phóng to -->
+<div class="modal fade" id="avatarModal" tabindex="-1" aria-labelledby="avatarModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="avatarModalLabel">Xem Ảnh Avatar</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img id="modalAvatarImage" src="" class="img-fluid" alt="Avatar" />
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Thêm input file ẩn -->
 <input type="file" id="avatarInput" style="display: none" accept="image/*">
 
 @section scripts {
     <script>
+        $(document).ready(function () {
+            // Xử lý khi click vào ảnh avatar để mở modal
+            $(document).on('click', '.profile-avatar', function () {
+                var src = $(this).attr('src');
+                $('#modalAvatarImage').attr('src', src);  // Gán ảnh vào modal
+            });
+
+            // Xử lý khi chọn file avatar mới
+            $('#avatarInput').change(function () {
+                var file = this.files[0];
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    // Cập nhật ảnh mới
+                    var avatarContainer = $('.position-relative.d-inline-block.mb-4');
+                    avatarContainer.html(`
+                            <img src="${e.target.result}" class="rounded-circle profile-avatar"
+                                 style="width: 150px; height: 150px; object-fit: cover;" alt="Profile"
+                                 data-bs-toggle="modal" data-bs-target="#avatarModal">
+                            <button type="button" class="btn btn-danger btn-sm rounded-circle position-absolute bottom-0 end-0 btn-remove-avatar">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                            <button type="button" class="btn btn-primary btn-sm rounded-circle position-absolute bottom-0 end-0 btn-camera">
+                                <i class="fas fa-camera"></i>
+                            </button>
+                        `);
+                };
+
+                reader.readAsDataURL(file);
+            });
+        });
+
+
         $(document).ready(function() {
             // Xử lý khi click vào nút camera
             $('.btn-camera').click(function() {
                 $('#avatarInput').click();
             });
 
-            
+
             // Xử lý khi chọn file
             $('#avatarInput').change(function() {
                 var file = this.files[0];
@@ -168,7 +217,7 @@
                             // Thay thế div chữ cái đầu bằng ảnh avatar
                             var avatarContainer = $('.position-relative.d-inline-block.mb-4');
                             avatarContainer.html(`
-                                <img src="${response.avatar}" class="rounded-circle profile-avatar" 
+                                <img src="${response.avatar}" class="rounded-circle profile-avatar"
                                      style="width: 150px; height: 150px; object-fit: cover;" alt="Profile">
                                 <button type="button" class="btn btn-primary btn-sm rounded-circle position-absolute bottom-0 end-0 btn-camera">
                                     <i class="fas fa-camera"></i>
@@ -179,6 +228,6 @@
                 });
             });
         });
+
     </script>
 }
-

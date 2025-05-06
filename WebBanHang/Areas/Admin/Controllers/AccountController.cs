@@ -86,6 +86,12 @@ namespace WebBanHang.Areas.Admin.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            // Nếu user đã đăng nhập và là Customer, chuyển về trang chủ
+            if (User.Identity.IsAuthenticated && User.IsInRole("Customer"))
+            {
+                return RedirectToAction("Index", "Home", new { area = "" });
+            }
+            
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -102,12 +108,17 @@ namespace WebBanHang.Areas.Admin.Controllers
                 return View(model);
             }
 
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
+            // Kiểm tra xác thực
             var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
+                    var user = await UserManager.FindByNameAsync(model.UserName);
+                    if (user != null && await UserManager.IsInRoleAsync(user.Id, "Customer"))
+                    {
+                        // Nếu là Customer, luôn chuyển về trang chủ
+                        return RedirectToAction("Index", "Home", new { area = "" });
+                    }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -319,6 +330,11 @@ namespace WebBanHang.Areas.Admin.Controllers
                 AddErrors(result);
             }
             return View();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
         }
     }
 }

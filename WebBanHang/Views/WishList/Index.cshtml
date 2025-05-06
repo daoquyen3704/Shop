@@ -1,0 +1,180 @@
+﻿@model WebBanHang.Models.ProfileViewModel
+@{
+    ViewBag.Title = "Sản Phẩm Yêu Thích";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .avatar-initial {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background-color: #0d6efd;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 48px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+</style>
+
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-3">
+                <div class="card border-0 rounded-3 shadow-lg mb-4">
+                    <div class="card-body text-center">
+                        @{
+                            var initials = "";
+                            if (!string.IsNullOrEmpty(Model.FirstName))
+                            {
+                                initials += Model.FirstName[0];
+                            }
+                            if (!string.IsNullOrEmpty(Model.LastName))
+                            {
+                                initials += Model.LastName[0];
+                            }
+                        }
+                        <div class="position-relative d-inline-block mb-4">
+                            @if (string.IsNullOrEmpty(Model.Avatar))
+                            {
+                                <div class="avatar-initial">@initials.ToUpper()</div>
+                            }
+                            else
+                            {
+                                <img src="@Model.Avatar" class="rounded-circle profile-avatar"
+                                     style="width: 150px; height: 150px; object-fit: cover;" alt="Profile"
+                                     data-bs-toggle="modal" data-bs-target="#avatarModal" />
+                            }
+
+                            <button type="button" class="btn btn-primary btn-sm rounded-circle position-absolute bottom-0 end-0 btn-camera">
+                                <i class="fas fa-camera"></i>
+                            </button>
+                        </div>
+
+                        <h4 class="mb-1">@(Model.FirstName + " " + Model.LastName)</h4>
+                        <p class="text-muted mb-3">Thành viên từ ngày @Model.CreatedDate.ToString("dd/MM/yyyy")</p>
+                    </div>
+                </div>
+                <div class="card border-0 rounded-3 shadow-lg">
+                    <div class="card-body p-0">
+                        <div class="list-group list-group-flush">
+                            <a href="@Url.Action("Profile", "Account")" class="list-group-item list-group-item-action active">
+                                <i class="fas fa-user me-2"></i>Thông Tin Cá Nhân
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <i class="fas fa-shopping-bag me-2"></i>Đơn Hàng
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <i class="fas fa-heart me-2"></i>Yêu Thích
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <i class="fas fa-lock me-2"></i>Đổi Mật Khẩu
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Main Content -->
+            <div class="col-lg-9">
+                <div class="card border-0 rounded-3 shadow-lg">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h4 class="mb-0">Sản Phẩm Yêu Thích</h4>
+                            <div class="d-flex align-items-center">
+                                <span class="me-2">Sắp xếp:</span>
+                                <select class="form-select" style="width: auto;">
+                                    <option value="newest">Mới nhất</option>
+                                    <option value="price-asc">Giá tăng dần</option>
+                                    <option value="price-desc">Giá giảm dần</option>
+                                    <option value="name-asc">Tên A-Z</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row g-4">
+                            <!-- Product 1 -->
+                            <div class="col-md-6 col-lg-4">
+                                <div class="card border-0 rounded-3 shadow-lg h-100">
+                                    <div class="position-relative">
+                                        <img src="img/car-1.png" class="card-img-top" alt="Product">
+                                        <div class="position-absolute top-0 end-0 p-2">
+                                            <button class="btn btn-danger rounded-circle">
+                                                <i class="fas fa-heart"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Rolex Submariner</h5>
+                                        <p class="card-text text-muted">Mã: ROL-001</p>
+                                        <h4 class="text-primary mb-3">1.500.000.000 ₫</h4>
+                                        <div class="d-grid gap-2">
+                                            <a href="product-detail.html" class="btn btn-primary rounded-pill">Xem chi tiết</a>
+                                            <button class="btn btn-outline-primary rounded-pill">
+                                                <i class="fas fa-shopping-cart me-2"></i>Thêm vào giỏ hàng
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Product 2 -->
+                            <div class="col-md-6 col-lg-4">
+                                <div class="card border-0 rounded-3 shadow-lg h-100">
+                                    <div class="position-relative">
+                                        <img src="img/car-2.png" class="card-img-top" alt="Product">
+                                        <div class="position-absolute top-0 end-0 p-2">
+                                            <button class="btn btn-danger rounded-circle">
+                                                <i class="fas fa-heart"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Omega Seamaster</h5>
+                                        <p class="card-text text-muted">Mã: OMG-002</p>
+                                        <h4 class="text-primary mb-3">800.000.000 ₫</h4>
+                                        <div class="d-grid gap-2">
+                                            <a href="product-detail.html" class="btn btn-primary rounded-pill">Xem chi tiết</a>
+                                            <button class="btn btn-outline-primary rounded-pill">
+                                                <i class="fas fa-shopping-cart me-2"></i>Thêm vào giỏ hàng
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Product 3 -->
+                            <div class="col-md-6 col-lg-4">
+                                <div class="card border-0 rounded-3 shadow-lg h-100">
+                                    <div class="position-relative">
+                                        <img src="img/car-3.png" class="card-img-top" alt="Product">
+                                        <div class="position-absolute top-0 end-0 p-2">
+                                            <button class="btn btn-danger rounded-circle">
+                                                <i class="fas fa-heart"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Patek Philippe Nautilus</h5>
+                                        <p class="card-text text-muted">Mã: PP-003</p>
+                                        <h4 class="text-primary mb-3">2.500.000.000 ₫</h4>
+                                        <div class="d-grid gap-2">
+                                            <a href="product-detail.html" class="btn btn-primary rounded-pill">Xem chi tiết</a>
+                                            <button class="btn btn-outline-primary rounded-pill">
+                                                <i class="fas fa-shopping-cart me-2"></i>Thêm vào giỏ hàng
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

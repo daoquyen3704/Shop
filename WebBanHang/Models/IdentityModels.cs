@@ -36,7 +36,7 @@ namespace WebBanHang.Models
         {
         }
         public DbSet<ThongKe> ThongKes { get; set; }
-        //public DbSet<ReviewProduct> ReviewProducts { get; set; }
+        public DbSet<WishList> WishLists { get; set; }
         public DbSet<ReviewProduct> Reviews { get; set; }
 
         public DbSet<Category> Categories { get; set; }
