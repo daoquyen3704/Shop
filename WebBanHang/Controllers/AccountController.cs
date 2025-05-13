@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -13,9 +14,10 @@ using WebBanHang.Models;
 
 namespace WebBanHang.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class AccountController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -35,7 +37,7 @@ namespace WebBanHang.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set
+            set
             {
                 _signInManager = value;
             }
@@ -203,8 +205,39 @@ namespace WebBanHang.Controllers
             return Json(new { success = false });
         }
 
+        public ActionResult OrderHistory()
+        {
+            var userId = User.Identity.GetUserId(); // Lấy userId của người dùng
+            var orders = db.Orders
+                .Where(o => o.CustomerId == userId)
+                .Include("OrderDetails.Product") // <-- thêm dòng này
+                .OrderByDescending(o => o.CreatedDate)
+                .ToList();
 
-        
+            var result = orders.Select(o => new HistoryOrderViewModels
+            {
+                OrderId = o.Id,
+                Code = o.Code,
+                CreatedDate = o.CreatedDate ?? DateTime.Now,
+                TotalAmount = o.TotalAmount,
+                Status = o.Status,
+                PaymentMethod = o.TypePayment == 1 ? "COD" : "Chuyển Khoản",
+                ShippingAddress = o.Address,
+                OrderDetails = o.OrderDetails.Select(d => new OrderDetailViewModel
+                {
+                    ProductId = d.Product.Id,
+                    ProductAlias = d.Product.Alias,
+                    ProductName = d.Product.Title, // Lấy tên sản phẩm từ Product model
+                    ProductImage = d.Product.Image, // Lấy hình ảnh sản phẩm từ Product model
+                    Price = d.Price,
+                    Quanlity = d.Quanlity
+                }).ToList()
+            }).ToList();
+
+            return View(result);
+        }
+
+
 
         // GET: /Account/ForgotPassword
         [AllowAnonymous]
@@ -221,12 +254,23 @@ namespace WebBanHang.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                var user = await UserManager.FindByEmailAsync(model.Email);
+                if (user == null)
                 {
+                    // Don't reveal that the user does not exist or is not confirmed
                     return View("ForgotPasswordConfirmation");
                 }
+
+                // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                // Send an email with this link
+                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                WebBanHang.Models.Common.Common.SendMail("LuxuryWatch", "Quên mật khẩu", "Bạn click vào <a href='" + callbackUrl + "'>link này</a> để reset mật khẩu", model.Email);
+                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
+
+            // If we got this far, something failed, redisplay form
             return View(model);
         }
 
@@ -404,11 +448,11 @@ namespace WebBanHang.Controllers
 
         private ActionResult RedirectToLocal(string returnUrl)
         {
-            if (Url.IsLocalUrl(returnUrl))
+            if (Url.IsLocalUrl(returnUrl) && !returnUrl.StartsWith("/admin", StringComparison.OrdinalIgnoreCase))
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("/");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

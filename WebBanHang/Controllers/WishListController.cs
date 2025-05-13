@@ -40,7 +40,7 @@ namespace WebBanHang.Controllers
             var checkItem = db.WishLists.FirstOrDefault(x => x.ProductId == ProductId && x.Username == User.Identity.Name);
             if (checkItem != null)
             {
-                return Json(new { Success = false, Message = "Sản phẩm đã được yêu thích rồi." });
+                return Json(new { Success = false, IsExists = true });
             }
             var item = new WishList();
             item.ProductId = ProductId;
@@ -48,7 +48,7 @@ namespace WebBanHang.Controllers
             item.CreatedDate = DateTime.Now;
             db.WishLists.Add(item);
             db.SaveChanges();
-            return Json(new { Success = true });
+            return Json(new { Success = true, IsExists = false });
         }
 
         [HttpPost]

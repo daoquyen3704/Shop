@@ -61,7 +61,6 @@ namespace WebBanHang
                 defaults: new { controller = "News", action = "Index", alias = UrlParameter.Optional },
                 namespaces: new[] { "WebBanHang.Controllers" }
             );
-            
             routes.MapRoute(
                   name: "CheckOut",
                   url: "thanh-toan",

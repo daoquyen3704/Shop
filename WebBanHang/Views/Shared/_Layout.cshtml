@@ -110,9 +110,9 @@
                                     <i class="fas fa-user me-2"></i>@User.Identity.Name
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-                                    <li><a class="dropdown-item" href="@Url.Action("Profile", "Account")"><i class="fas fa-user me-2"></i>Hồ Sơ</a></li>
-                                    <li><a class="dropdown-item" href="/account/orders"><i class="fas fa-shopping-bag me-2"></i>Đơn Hàng</a></li>
-                                    <li><a class="dropdown-item" href="/account/wishlist"><i class="fas fa-heart me-2"></i>Yêu Thích</a></li>
+                                    <li><a class="dropdown-item" href="/account/profile"><i class="fas fa-user me-2"></i>Hồ Sơ</a></li>
+                                    <li><a class="dropdown-item" href="/account/orderhistory"><i class="fas fa-shopping-bag me-2"></i>Đơn Hàng</a></li>
+                                    <li><a class="dropdown-item" href="/WishList"><i class="fas fa-heart me-2"></i>Yêu Thích</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li>
                                         @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logOffForm" }))
@@ -288,6 +288,8 @@
                 }
             });
         });
+
+
     </script>
 
     @*<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@

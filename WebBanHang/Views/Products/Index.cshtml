@@ -93,8 +93,8 @@
                                         </div>
 
                                         <div class="position-absolute top-0 end-0 p-2">
-                                            <button class="btn btn-outline-danger rounded-circle">
-                                                <i class="fas fa-heart"></i>
+                                            <button class="btn btn-outline-danger rounded-circle btn-toggle-wishlist" data-product-id="@item.Id">
+                                                <i class="fas fa-heart icon-heart"></i>
                                             </button>
                                         </div>
                                     </div>
@@ -309,5 +309,39 @@
             // Khởi tạo hiển thị
             displayProducts(currentPage);
         });
+
+        $(document).on('click', '.btn-toggle-wishlist', function () {
+            var btn = $(this);
+            var productId = btn.data('product-id');
+            var icon = btn.find('.icon-heart');
+
+            $.ajax({
+                url: '/WishList/PostWishlist',
+                type: 'POST',
+                data: { ProductId: productId },
+                success: function (res) {
+                    if (res.Success) {
+                        // Ẩn icon khi thêm thành công
+                        icon.hide();
+                        alert("Đã thêm vào danh sách yêu thích");
+                    } else {
+                        // Nếu đã tồn tại → gọi xóa
+                        $.ajax({
+                            url: '/WishList/PostDeleteWishlist',
+                            type: 'POST',
+                            data: { ProductId: productId },
+                            success: function (res) {
+                                if (res.Success) {
+                                    icon.show(); // Hiện lại icon khi xóa
+                                    alert("Đã xóa khỏi danh sách yêu thích");
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        });
+
+        
     </script>
 }

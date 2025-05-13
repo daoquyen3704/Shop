@@ -1,85 +1,15 @@
-﻿@model WebBanHang.Models.ProfileViewModel
+﻿@model PagedList.IPagedList<WebBanHang.Models.EF.WishList>
 @{
     ViewBag.Title = "Sản Phẩm Yêu Thích";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<style>
-    .avatar-initial {
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        background-color: #0d6efd;
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 48px;
-        font-weight: bold;
-        text-transform: uppercase;
-    }
-</style>
+
 
 <div class="container-fluid py-5">
     <div class="container py-5">
         <div class="row">
-            <!-- Sidebar -->
-            <div class="col-lg-3">
-                <div class="card border-0 rounded-3 shadow-lg mb-4">
-                    <div class="card-body text-center">
-                        @{
-                            var initials = "";
-                            if (!string.IsNullOrEmpty(Model.FirstName))
-                            {
-                                initials += Model.FirstName[0];
-                            }
-                            if (!string.IsNullOrEmpty(Model.LastName))
-                            {
-                                initials += Model.LastName[0];
-                            }
-                        }
-                        <div class="position-relative d-inline-block mb-4">
-                            @if (string.IsNullOrEmpty(Model.Avatar))
-                            {
-                                <div class="avatar-initial">@initials.ToUpper()</div>
-                            }
-                            else
-                            {
-                                <img src="@Model.Avatar" class="rounded-circle profile-avatar"
-                                     style="width: 150px; height: 150px; object-fit: cover;" alt="Profile"
-                                     data-bs-toggle="modal" data-bs-target="#avatarModal" />
-                            }
-
-                            <button type="button" class="btn btn-primary btn-sm rounded-circle position-absolute bottom-0 end-0 btn-camera">
-                                <i class="fas fa-camera"></i>
-                            </button>
-                        </div>
-
-                        <h4 class="mb-1">@(Model.FirstName + " " + Model.LastName)</h4>
-                        <p class="text-muted mb-3">Thành viên từ ngày @Model.CreatedDate.ToString("dd/MM/yyyy")</p>
-                    </div>
-                </div>
-                <div class="card border-0 rounded-3 shadow-lg">
-                    <div class="card-body p-0">
-                        <div class="list-group list-group-flush">
-                            <a href="@Url.Action("Profile", "Account")" class="list-group-item list-group-item-action active">
-                                <i class="fas fa-user me-2"></i>Thông Tin Cá Nhân
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action">
-                                <i class="fas fa-shopping-bag me-2"></i>Đơn Hàng
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action">
-                                <i class="fas fa-heart me-2"></i>Yêu Thích
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action">
-                                <i class="fas fa-lock me-2"></i>Đổi Mật Khẩu
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Main Content -->
-            <div class="col-lg-9">
+            <div class="col-lg-12">
                 <div class="card border-0 rounded-3 shadow-lg">
                     <div class="card-body p-4">
                         <div class="d-flex justify-content-between align-items-center mb-4">
@@ -96,80 +26,43 @@
                         </div>
 
                         <div class="row g-4">
-                            <!-- Product 1 -->
-                            <div class="col-md-6 col-lg-4">
-                                <div class="card border-0 rounded-3 shadow-lg h-100">
-                                    <div class="position-relative">
-                                        <img src="img/car-1.png" class="card-img-top" alt="Product">
-                                        <div class="position-absolute top-0 end-0 p-2">
-                                            <button class="btn btn-danger rounded-circle">
-                                                <i class="fas fa-heart"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">Rolex Submariner</h5>
-                                        <p class="card-text text-muted">Mã: ROL-001</p>
-                                        <h4 class="text-primary mb-3">1.500.000.000 ₫</h4>
-                                        <div class="d-grid gap-2">
-                                            <a href="product-detail.html" class="btn btn-primary rounded-pill">Xem chi tiết</a>
-                                            <button class="btn btn-outline-primary rounded-pill">
-                                                <i class="fas fa-shopping-cart me-2"></i>Thêm vào giỏ hàng
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @foreach (var item in Model)
+                            {
+                                var strImg = item.Product.ProductImage.FirstOrDefault(x => x.IsDefault)?.Image ?? "path/to/default.png";
 
-                            <!-- Product 2 -->
-                            <div class="col-md-6 col-lg-4">
-                                <div class="card border-0 rounded-3 shadow-lg h-100">
-                                    <div class="position-relative">
-                                        <img src="img/car-2.png" class="card-img-top" alt="Product">
-                                        <div class="position-absolute top-0 end-0 p-2">
-                                            <button class="btn btn-danger rounded-circle">
-                                                <i class="fas fa-heart"></i>
-                                            </button>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="card border-0 rounded-3 shadow-lg h-100">
+                                        <div class="position-relative">
+                                            <img src="@strImg" class="card-img-top" alt="@item.Product.Title" />
+                                            <div class="position-absolute top-0 end-0 p-2">
+                                                @*<button class="btn btn-outline-danger rounded-circle">
+                                                    <i class="fas fa-heart"></i>
+                                                </button>*@
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">Omega Seamaster</h5>
-                                        <p class="card-text text-muted">Mã: OMG-002</p>
-                                        <h4 class="text-primary mb-3">800.000.000 ₫</h4>
-                                        <div class="d-grid gap-2">
-                                            <a href="product-detail.html" class="btn btn-primary rounded-pill">Xem chi tiết</a>
-                                            <button class="btn btn-outline-primary rounded-pill">
-                                                <i class="fas fa-shopping-cart me-2"></i>Thêm vào giỏ hàng
-                                            </button>
+                                        <div class="card-body">
+                                            <h6 class="card-title">@item.Product.Title</h6>
+                                            <p class="card-text text-muted">Mã: @item.Product.ProductCode</p>
+                                            <p class="card-text text-muted" style="font-size: 0.85rem; white-space: pre-line;">@item.Product.Description</p>
+                                            <h6 class="text-primary mb-3 text-center">
+                                                @if (item.Product.PriceSale.HasValue && item.Product.PriceSale.Value > 0 && item.Product.IsSale)
+                                                {
+                                                    <span class="text-decoration-line-through text-muted me-2">@WebBanHang.Models.Common.Common.FormatNumber(item.Product.Price, 0) ₫</span>
+                                                    <span>@WebBanHang.Models.Common.Common.FormatNumber(item.Product.PriceSale.Value, 0) ₫</span>
+                                                }
+                                                else
+                                                {
+                                                    <span>@WebBanHang.Models.Common.Common.FormatNumber(item.Product.Price, 0) ₫</span>
+                                                }
+                                            </h6>
+                                            <div class="d-grid">
+                                                <a href="/chi-tiet/@item.Product.Alias-p@(item.Product.Id)" class="btn btn-primary rounded-pill">Xem chi tiết</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            }
 
-                            <!-- Product 3 -->
-                            <div class="col-md-6 col-lg-4">
-                                <div class="card border-0 rounded-3 shadow-lg h-100">
-                                    <div class="position-relative">
-                                        <img src="img/car-3.png" class="card-img-top" alt="Product">
-                                        <div class="position-absolute top-0 end-0 p-2">
-                                            <button class="btn btn-danger rounded-circle">
-                                                <i class="fas fa-heart"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">Patek Philippe Nautilus</h5>
-                                        <p class="card-text text-muted">Mã: PP-003</p>
-                                        <h4 class="text-primary mb-3">2.500.000.000 ₫</h4>
-                                        <div class="d-grid gap-2">
-                                            <a href="product-detail.html" class="btn btn-primary rounded-pill">Xem chi tiết</a>
-                                            <button class="btn btn-outline-primary rounded-pill">
-                                                <i class="fas fa-shopping-cart me-2"></i>Thêm vào giỏ hàng
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -177,4 +70,58 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        
+
+        // Xử lý sắp xếp
+        const sortSelect = document.querySelector('.form-select');
+        const productContainer = document.querySelector('.row.g-4');
+        const products = Array.from(productContainer.children);
+
+        sortSelect.addEventListener('change', function () {
+            const sortValue = this.value;
+            let sortedProducts;
+
+            switch (sortValue) {
+                case 'newest':
+                    // Mặc định sắp xếp theo thứ tự hiển thị ban đầu
+                    sortedProducts = products;
+                    break;
+                case 'price-asc':
+                    sortedProducts = products.sort((a, b) => {
+                        const priceA = parseInt(a.querySelector('.text-primary').textContent.replace(/[^\d]/g, ''));
+                        const priceB = parseInt(b.querySelector('.text-primary').textContent.replace(/[^\d]/g, ''));
+                        return priceA - priceB;
+                    });
+                    break;
+                case 'price-desc':
+                    sortedProducts = products.sort((a, b) => {
+                        const priceA = parseInt(a.querySelector('.text-primary').textContent.replace(/[^\d]/g, ''));
+                        const priceB = parseInt(b.querySelector('.text-primary').textContent.replace(/[^\d]/g, ''));
+                        return priceB - priceA;
+                    });
+                    break;
+                case 'name-asc':
+                    sortedProducts = products.sort((a, b) => {
+                        const nameA = a.querySelector('.card-title').textContent;
+                        const nameB = b.querySelector('.card-title').textContent;
+                        return nameA.localeCompare(nameB);
+                    });
+                    break;
+            }
+
+            // Xóa tất cả sản phẩm hiện tại
+            while (productContainer.firstChild) {
+                productContainer.removeChild(productContainer.firstChild);
+            }
+
+            // Thêm lại sản phẩm đã sắp xếp
+            sortedProducts.forEach(product => {
+                productContainer.appendChild(product);
+            });
+        });
+    });
+</script>
 
